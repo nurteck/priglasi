@@ -1,36 +1,164 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Салтанат — сайт цифровых приглашений на тои
 
-## Getting Started
+Next.js (App Router) + TypeScript + Tailwind CSS. Мобильный трафик — приоритет,
+все страницы проверены на ширине 375px.
 
-First, run the development server:
+## Быстрый старт
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # заполните ключи Supabase и пароль админки (см. ниже)
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run build && npm run start   # прод-сборка
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 1. Как поменять название, телефон и цены
 
-## Learn More
+Все настройки бизнеса лежат в одном файле — **[`src/site.config.ts`](src/site.config.ts)**.
+Больше нигде в проекте эти значения не хардкодятся.
 
-To learn more about Next.js, take a look at the following resources:
+- `brandName`, `tagline` — название и слоган.
+- `whatsapp`, `instagram`, `telegram`, `phoneDisplay`, `city`, `hours` — контакты.
+- `packages` — три тарифа (цена, старая цена, список того, что входит, какой отмечен «Популярный»).
+- `stats` — цифры в полосе доверия на главной.
+- `theme.colors` / `theme.fonts` — базовые цвета и шрифты сайта (не приглашений — те отдельно, см. п.3).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+После изменения файла просто сохраните — Next.js подхватит изменения в dev-режиме,
+для прод-сборки запустите `npm run build`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 2. Как добавить новый дизайн в каталог
 
-## Deploy on Vercel
+1. Откройте **[`src/content/designs.ts`](src/content/designs.ts)**.
+2. Скопируйте один объект `Design` и измените `slug`, `name`, `category`, `themeId`
+   (один из 6 тем в `src/themes/index.ts`), `cover` (путь к обложке) и `demoInvitation`
+   (slug демо-приглашения).
+3. Добавьте обложку в `public/images/` с понятным именем вида
+   `design-<slug>-cover.png` (замените сгенерированную заглушку своим файлом
+   с тем же именем — тогда ничего больше менять не нужно).
+4. Если хотите новое демо (а не переиспользовать существующее) — добавьте объект
+   в **[`src/content/invitations/demo/index.ts`](src/content/invitations/demo/index.ts)**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 3. Как создать приглашение клиенту
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Скопируйте шаблон **[`src/content/invitations/_template.ts`](src/content/invitations/_template.ts)**
+   в `src/content/invitations/имя-slug.ts` (например `aidana-bakyt.ts`).
+2. Заполните имена, дату, место, программу вечера и остальные блоки —
+   комментарии в файле подсказывают формат. Любой блок можно убрать,
+   просто удалив соответствующее поле из `blocks`.
+3. Для премиум-пакета раскомментируйте `guestsKey` — это секретный пароль
+   для страницы со списком гостей.
+4. Добавьте фото в `public/images/` и укажите пути в `coverPhoto` / `gallery`.
+5. Зарегистрируйте приглашение в **[`src/content/invitations/index.ts`](src/content/invitations/index.ts)**
+   (добавьте импорт и строку в объект `invitations`).
+6. Ссылка для клиента: `https://ваш-домен/i/имя-slug`.
+   Ссылка на список гостей (если премиум): `https://ваш-домен/i/имя-slug/guests?key=ваш-ключ`.
+
+Темы (цвета, шрифты, фон, декор, музыка) лежат отдельно в
+**[`src/themes/index.ts`](src/themes/index.ts)** — 6 готовых тем, каждая привязывается
+к приглашению через `themeId`. Чтобы добавить новую тему, скопируйте один объект
+и придумайте новый `id`.
+
+## 4. Как посмотреть заказы и списки гостей
+
+- **Заказы**: `/admin` (пароль — переменная `ADMIN_PASSWORD` из `.env.local`).
+  Там же можно менять статус заказа и одним кликом открыть WhatsApp клиента.
+- **Список гостей конкретного приглашения**: `/i/[slug]/guests?key=...` —
+  ключ берётся из поля `guestsKey` в файле приглашения. Там же кнопка
+  «Скачать Excel (CSV)».
+
+## 5. Как создать проект Supabase и вставить ключи
+
+1. Зайдите на [supabase.com](https://supabase.com) → New Project (бесплатный план).
+2. В SQL Editor выполните по очереди файлы из папки **[`supabase/migrations/`](supabase/migrations/)**
+   (`001_orders.sql`, затем `002_rsvps.sql`).
+3. В настройках проекта (Settings → API) скопируйте:
+   - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`
+   - `anon public` ключ → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `service_role` ключ → `SUPABASE_SERVICE_ROLE_KEY` (секретный, только на сервере!)
+4. Вставьте значения в `.env.local` (создайте его на основе `.env.example`).
+5. Без этих ключей сайт продолжает работать: заказы и RSVP всё равно уходят
+   в WhatsApp, просто не сохраняются в базу — в консоли сервера будет предупреждение.
+
+Придумайте и впишите свой `ADMIN_PASSWORD` в тот же `.env.local`.
+
+## 6. Как залить на GitHub, подключить Vercel и домен .kg
+
+```bash
+git init                       # если ещё не инициализирован
+git add .
+git commit -m "Первая версия сайта Салтанат"
+git branch -M main
+git remote add origin https://github.com/ваш-аккаунт/saltanat.git
+git push -u origin main
+```
+
+1. На [vercel.com](https://vercel.com) → Add New → Project → выберите репозиторий.
+2. В настройках проекта → Environment Variables добавьте те же переменные,
+   что в `.env.local` (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`).
+3. Нажмите Deploy.
+4. Домен `.kg`: в Vercel → Settings → Domains добавьте свой домен, затем
+   у регистратора домена пропишите DNS-записи, которые покажет Vercel
+   (обычно A-запись или CNAME на `cname.vercel-dns.com`).
+5. После получения реального домена обновите `url` в `src/site.config.ts`.
+
+---
+
+## Структура проекта
+
+```
+src/
+  site.config.ts        — все настройки бизнеса (см. п.1)
+  types/                — общие типы (Design, Theme, Package, Invitation, Order, ...)
+  content/               — тексты и данные (дизайны, отзывы, FAQ, приглашения)
+  themes/                — 6 тем оформления приглашений
+  lib/                   — WhatsApp-ссылки, Supabase, валидация (zod), calendar, seo
+  components/
+    layout/              — шапка, подвал, WhatsApp-кнопка
+    ui/                   — кнопки, аккордеон, карточки и т.д.
+    home/, catalog/, order/, contact/, admin/ — блоки соответствующих страниц
+    invitation/           — движок приглашений (конверт, обложка, RSVP и т.д.)
+  app/
+    (site)/               — страницы с шапкой/подвалом (главная, каталог, заказ, о нас, контакты)
+    demo/[design]/         — демо приглашения без шапки/подвала (во весь экран)
+    i/[slug]/               — приглашение клиента + список гостей
+    admin/                  — админка (защищена паролем через src/proxy.ts)
+    api/                    — маршруты для заказов, RSVP, админки, CSV-экспорта
+supabase/migrations/     — SQL для таблиц orders и rsvps
+scripts/gen-placeholders.mjs — генератор PNG-заглушек (см. ниже)
+```
+
+## О картинках-заглушках
+
+В `public/images/` уже лежат 55 сгенерированных PNG-заглушек (цветные градиенты
+по цветам тем) — сайт полностью рабочий и без ваших фото. Чтобы поставить свои
+фотографии, просто замените файл с тем же именем (например
+`design-ivory-classic-cover.png`) — путь в коде менять не нужно. Список того,
+что означает какое имя, легко понять по названию файла (design-*-cover — обложка
+каталога, couple-* — фото пары, theme-*-bg — фон темы, review-* — аватары отзывов
+и т.д.). Если нужно перегенерировать заглушки — `node scripts/gen-placeholders.mjs`.
+
+Музыкальные файлы (`public/music/theme-*.mp3`) нужно добавить самостоятельно —
+это не генерируется скриптом. Без них кнопка музыки просто не будет ничего
+проигрывать, остальной сайт не пострадает.
+
+## Чек-лист перед запуском
+
+1. Заменить временный номер `whatsapp` в `site.config.ts` на реальный.
+2. Заменить `url` в `site.config.ts` на реальный домен после деплоя.
+3. Заполнить `ADMIN_PASSWORD` в `.env.local` / переменных Vercel — своим паролем.
+4. Создать проект Supabase, выполнить миграции, вставить ключи (см. п.5).
+5. Заменить хотя бы обложки 12 дизайнов и фото на главной (`hero-main.png`) на свои.
+6. Добавить mp3-файлы музыки в `public/music/` для тем, которые используете.
+7. Проверить `/admin` — вход по паролю, смена статусов, кнопка WhatsApp.
+8. Создать первое реальное приглашение клиента и проверить ссылку `/i/...`
+   с телефона (375px) — конверт, музыку, RSVP-форму.
+9. Проверить, что письма RSVP и заказы действительно попадают в Supabase
+   (после настройки ключей) — оформите тестовый заказ и тестовый RSVP.
+10. Прогнать Lighthouse (мобильный) на главной, каталоге и странице приглашения —
+    цель 90+ по производительности и доступности.
