@@ -1,7 +1,17 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { waLink } from "@/lib/whatsapp";
 
 export function WhatsAppFab() {
+  const pathname = usePathname();
+
+  // На /order внизу уже есть своя липкая панель с кнопкой «Далее»/«Отправить» —
+  // плавающая кнопка WhatsApp перекрывала бы её на мобильном. Скрываем здесь,
+  // чтобы не мешать основному сценарию оформления заказа.
+  if (pathname?.startsWith("/order")) return null;
+
   return (
     <a
       href={waLink("Здравствуйте! Хочу узнать подробнее про приглашения на той.")}
