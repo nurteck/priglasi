@@ -40,6 +40,26 @@ body {
   color: var(--color-text);
   font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+html {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+/*
+  Мобильные браузеры (Safari/Chrome на iOS и Android) автоматически зумят
+  страницу при фокусе на поле ввода, если размер шрифта в нём меньше 16px.
+  Из-за этого страница "прыгает" и масштабируется. Принудительно держим
+  16px во всех полях ввода независимо от утилитарных классов Tailwind
+  (например text-sm), которые визуально уменьшают текст в других местах.
+*/
+input,
+select,
+textarea {
+  font-size: 16px !important;
 }
 
 h1, h2, h3, h4 {
