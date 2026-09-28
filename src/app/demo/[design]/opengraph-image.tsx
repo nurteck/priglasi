@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import { getDesignBySlug } from "@/content/designs";
-import { getDemoInvitation } from "@/content/invitations/demo";
 import { getTheme } from "@/themes";
 import { siteConfig } from "@/site.config";
 
@@ -10,12 +9,7 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: Promise<{ design: string }> }) {
   const { design: slug } = await params;
   const design = getDesignBySlug(slug);
-  const invitation = design ? getDemoInvitation(design.demoInvitation) : undefined;
-  const theme = invitation ? getTheme(invitation.themeId) : null;
-
-  const names = invitation
-    ? [invitation.names.first, invitation.names.second].filter(Boolean).join(" & ")
-    : design?.name ?? siteConfig.brandName;
+  const theme = design ? getTheme(design.themeId) : null;
 
   return new ImageResponse(
     (
@@ -34,8 +28,9 @@ export default async function Image({ params }: { params: Promise<{ design: stri
         <div style={{ fontSize: 28, letterSpacing: 6, textTransform: "uppercase", color: theme?.colors.accent ?? "#7A1F2B" }}>
           {siteConfig.brandName} · Демо
         </div>
-        <div style={{ fontSize: 76, marginTop: 24, textAlign: "center", padding: "0 60px" }}>{names}</div>
-        <div style={{ fontSize: 30, marginTop: 20, color: theme?.colors.muted ?? "#7A6A63" }}>{design?.name}</div>
+        <div style={{ fontSize: 76, marginTop: 24, textAlign: "center", padding: "0 60px" }}>
+          {design?.name ?? siteConfig.brandName}
+        </div>
       </div>
     ),
     { ...size }

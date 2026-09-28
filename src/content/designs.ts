@@ -2,10 +2,11 @@ import type { Design } from "@/types";
 
 /**
  * 12 дизайнов каталога. Каждый привязан к теме из src/themes
- * и к демо-приглашению из src/content/invitations/demo.
+ * (цвета/шрифты/декор для будущего приглашения на этом дизайне).
  *
- * Чтобы добавить новый дизайн: допишите объект сюда, добавьте обложку
- * в public/images и (если нужно) демо-приглашение в invitations/demo.
+ * Чтобы добавить новый дизайн: допишите объект сюда и добавьте обложку
+ * в public/images. Настоящее приглашение на этом дизайне создаётся
+ * отдельно под конкретного клиента (см. src/content/invitations/_template.ts).
  */
 export const designs: Design[] = [
   {
@@ -18,7 +19,6 @@ export const designs: Design[] = [
     badges: ["hit"],
     featured: true,
     order: 1,
-    demoInvitation: "wedding-ivory",
   },
   {
     slug: "burgundy-royal",
@@ -30,7 +30,6 @@ export const designs: Design[] = [
     badges: ["hit"],
     featured: true,
     order: 2,
-    demoInvitation: "wedding-burgundy",
   },
   {
     slug: "olive-nezabudka",
@@ -41,7 +40,6 @@ export const designs: Design[] = [
     defaultPackage: "photo",
     featured: true,
     order: 3,
-    demoInvitation: "kyz-uzatuu-olive",
   },
   {
     slug: "ala-too-salt",
@@ -53,7 +51,6 @@ export const designs: Design[] = [
     badges: ["new"],
     featured: true,
     order: 4,
-    demoInvitation: "kyz-uzatuu-ala-too",
   },
   {
     slug: "noir-elegance",
@@ -64,7 +61,6 @@ export const designs: Design[] = [
     defaultPackage: "premium",
     featured: true,
     order: 5,
-    demoInvitation: "wedding-noir",
   },
   {
     slug: "pastel-gul",
@@ -75,7 +71,6 @@ export const designs: Design[] = [
     defaultPackage: "basic",
     featured: true,
     order: 6,
-    demoInvitation: "jubilee-pastel",
   },
   {
     slug: "sunnot-bahyt",
@@ -87,7 +82,6 @@ export const designs: Design[] = [
     badges: ["new"],
     featured: true,
     order: 7,
-    demoInvitation: "sunnot-bahyt",
   },
   {
     slug: "tushoo-tim",
@@ -98,7 +92,6 @@ export const designs: Design[] = [
     defaultPackage: "basic",
     featured: true,
     order: 8,
-    demoInvitation: "tushoo-tim",
   },
   {
     slug: "olive-aigerim",
@@ -108,7 +101,6 @@ export const designs: Design[] = [
     cover: "/images/design-olive-aigerim-cover.png",
     defaultPackage: "photo",
     order: 9,
-    demoInvitation: "wedding-olive",
   },
   {
     slug: "burgundy-nur",
@@ -118,7 +110,6 @@ export const designs: Design[] = [
     cover: "/images/design-burgundy-nur-cover.png",
     defaultPackage: "premium",
     order: 10,
-    demoInvitation: "jubilee-burgundy",
   },
   {
     slug: "ivory-nika",
@@ -128,7 +119,6 @@ export const designs: Design[] = [
     cover: "/images/design-ivory-nika-cover.png",
     defaultPackage: "basic",
     order: 11,
-    demoInvitation: "kyz-uzatuu-ivory",
   },
   {
     slug: "noir-adep",
@@ -138,7 +128,6 @@ export const designs: Design[] = [
     cover: "/images/design-noir-adep-cover.png",
     defaultPackage: "photo",
     order: 12,
-    demoInvitation: "sunnot-noir",
   },
 ];
 

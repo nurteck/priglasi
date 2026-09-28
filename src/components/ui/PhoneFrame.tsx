@@ -1,7 +1,12 @@
 import type { ReactNode } from "react";
 import clsx from "clsx";
 
-/** Рамка телефона для превью приглашений в каталоге и на главной. */
+/**
+ * Компактная рамка-«телефон» для превью дизайна в карточке каталога.
+ * Соотношение сторон короче настоящего экрана телефона (3:4, а не 9:19) —
+ * иначе в сетке из 2–4 колонок карточка растягивается на весь экран.
+ * Обод тонкий, чтобы на маленьком размере не выглядеть грузно.
+ */
 export function PhoneFrame({
   children,
   className,
@@ -12,12 +17,12 @@ export function PhoneFrame({
   return (
     <div
       className={clsx(
-        "relative mx-auto aspect-[9/19] w-full max-w-[260px] rounded-[2rem] border-[6px] border-text/90 bg-text/90 shadow-xl overflow-hidden",
+        "relative mx-auto aspect-[3/4] w-full max-w-[220px] rounded-2xl border-[3px] border-text/15 bg-white shadow-sm overflow-hidden",
         className
       )}
     >
-      <div className="absolute left-1/2 top-0 z-10 h-5 w-24 -translate-x-1/2 rounded-b-xl bg-text/90" />
-      <div className="relative h-full w-full overflow-hidden rounded-[1.4rem] bg-white">{children}</div>
+      <div className="absolute left-1/2 top-1.5 z-10 h-1.5 w-10 -translate-x-1/2 rounded-full bg-text/20" />
+      <div className="relative h-full w-full overflow-hidden rounded-[0.9rem]">{children}</div>
     </div>
   );
 }

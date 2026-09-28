@@ -78,7 +78,6 @@ export interface Design {
   badges?: ("hit" | "new")[];
   featured?: boolean;
   order: number;
-  demoInvitation: string; // slug приглашения в content/invitations/demo
 }
 
 export interface Review {

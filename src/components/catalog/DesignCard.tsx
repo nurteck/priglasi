@@ -18,14 +18,14 @@ export function DesignCard({ design }: { design: Design }) {
   });
 
   return (
-    <div className="flex flex-col rounded-2xl border border-black/5 bg-white p-4 shadow-sm">
+    <div className="flex flex-col rounded-2xl border border-black/5 bg-white p-3 shadow-sm">
       <div className="relative">
         <PhoneFrame>
           <Image
             src={design.cover}
             alt={`Обложка приглашения «${design.name}»`}
             fill
-            sizes="260px"
+            sizes="220px"
             loading="lazy"
             className="object-cover"
           />
@@ -41,24 +41,23 @@ export function DesignCard({ design }: { design: Design }) {
         )}
       </div>
 
-      <div className="mt-4 text-center">
-        <h3 className="font-heading text-lg text-text">{design.name}</h3>
+      <div className="mt-3 text-center">
+        <h3 className="font-heading text-base text-text leading-tight">{design.name}</h3>
         <p className="text-xs text-muted mt-0.5">{categoryLabels[design.category]}</p>
 
-        <div className="mt-2 flex items-baseline justify-center gap-2">
+        <div className="mt-1.5 flex items-baseline justify-center gap-2">
           {pkg.oldPrice && (
-            <span className="text-sm text-muted line-through">{pkg.oldPrice} сом</span>
+            <span className="text-xs text-muted line-through">{pkg.oldPrice} сом</span>
           )}
-          <span className="font-heading text-lg text-accent">{pkg.price} сом</span>
+          <span className="font-heading text-base text-accent">{pkg.price} сом</span>
         </div>
-        <p className="text-xs text-muted">пакет «{pkg.name}»</p>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <Button href={`/demo/${design.slug}`} variant="secondary" size="md">
-          Посмотреть
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <Button href={`/demo/${design.slug}`} variant="secondary" size="md" className="!px-2 text-xs">
+          Смотреть
         </Button>
-        <Button href={waLink(orderText)} target="_blank" rel="noopener noreferrer" size="md">
+        <Button href={waLink(orderText)} target="_blank" rel="noopener noreferrer" size="md" className="!px-2 text-xs">
           Заказать
         </Button>
       </div>

@@ -1,14 +1,26 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import { LayoutGrid, Heart, Flower2, Shield, Baby, PartyPopper, type LucideIcon } from "lucide-react";
 import { categories } from "@/content/categories";
 import type { CategoryId } from "@/types";
 
+// Пока нет реальных фото категорий — используем иконки на фирменном градиенте,
+// чтобы кружки читались осмысленно. Замените на фото гостей/декора, когда будут готовы:
+// достаточно добавить <Image> внутрь span вместо иконки, путь останется в content/categories.ts.
+const categoryIcons: Record<CategoryId | "all", LucideIcon> = {
+  all: LayoutGrid,
+  wedding: Heart,
+  "kyz-uzatuu": Flower2,
+  sunnot: Shield,
+  tushoo: Baby,
+  jubilee: PartyPopper,
+};
+
 export function CategoryStories({ active }: { active: CategoryId | "all" }) {
-  const items: { id: CategoryId | "all"; label: string; image: string }[] = [
-    { id: "all", label: "Все", image: "/images/category-all.png" },
+  const items: { id: CategoryId | "all"; label: string }[] = [
+    { id: "all", label: "Все" },
     ...categories,
   ];
 
@@ -17,6 +29,7 @@ export function CategoryStories({ active }: { active: CategoryId | "all" }) {
       {items.map((item) => {
         const isActive = active === item.id;
         const href = item.id === "all" ? "/catalog" : `/catalog?category=${item.id}`;
+        const Icon = categoryIcons[item.id];
         return (
           <Link
             key={item.id}
@@ -25,14 +38,20 @@ export function CategoryStories({ active }: { active: CategoryId | "all" }) {
           >
             <span
               className={clsx(
-                "relative h-16 w-16 rounded-full p-[2px]",
-                isActive
-                  ? "bg-gradient-to-tr from-accent to-gold"
-                  : "bg-black/10"
+                "relative h-16 w-16 rounded-full p-[2px] transition-transform",
+                isActive ? "bg-gradient-to-tr from-accent to-gold scale-105" : "bg-black/10"
               )}
             >
-              <span className="block h-full w-full rounded-full overflow-hidden border-2 border-bg relative">
-                <Image src={item.image} alt={item.label} fill sizes="64px" className="object-cover" />
+              <span
+                className="flex h-full w-full items-center justify-center rounded-full border-2 border-bg"
+                style={{ background: "linear-gradient(135deg, var(--color-accent-soft), #fff)" }}
+              >
+                <Icon
+                  size={24}
+                  className={isActive ? "text-accent" : "text-muted"}
+                  strokeWidth={1.75}
+                  aria-hidden="true"
+                />
               </span>
             </span>
             <span className={clsx("text-xs text-center", isActive ? "text-accent font-medium" : "text-muted")}>

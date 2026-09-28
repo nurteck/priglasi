@@ -1,7 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { TrustBar } from "@/components/home/TrustBar";
 import { PopularDesigns } from "@/components/home/PopularDesigns";
-import { LiveDemo } from "@/components/home/LiveDemo";
 import { Features } from "@/components/home/Features";
 import { Packages } from "@/components/home/Packages";
 import { Steps } from "@/components/home/Steps";
@@ -23,7 +22,6 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
       <PopularDesigns />
-      <LiveDemo />
       <Features />
       <Packages />
       <Steps />
