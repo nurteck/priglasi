@@ -15,10 +15,10 @@ export const siteConfig = {
   url: "https://saltanat.kg", // поменяйте на реальный домен после деплоя
 
   // Контакты
-  whatsapp: "996700000000", // временный номер, формат без "+"
+  whatsapp: "996553343210", // формат без "+", код 996 + номер без ведущего 0
   instagram: "saltanat",
   telegram: "saltanat",
-  phoneDisplay: "+996 700 00 00 00",
+  phoneDisplay: "+996 553 34 32 10",
   city: "Бишкек",
   hours: "Пн–Сб 10:00–19:00",
 
