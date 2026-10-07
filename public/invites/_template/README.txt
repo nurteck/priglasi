@@ -10,6 +10,9 @@
    public/shared/invite-data.js (таймер, списки program/photos, музыка,
    имя и места гостя из ?g=/?n=). Подключите этот скрипт одной строкой:
      <script src="/shared/invite-data.js" defer></script>
+   Плавающую кнопку «Назад» (ведёт туда, откуда открыли приглашение — в
+   каталог, если своей истории нет) подключите так же:
+     <script src="/shared/invite-back.js" defer></script>
 4. Заполните meta.json (карточка для каталога/админки):
    - title      — название дизайна в каталоге (например "Golden Arch")
    - category   — одно из: wedding, kyz-uzatuu, sunnot, tushoo, jubilee

@@ -19,8 +19,6 @@ export function DesignCard({ design }: { design: InviteRecord }) {
     >
       <a
         href={demoHref(design.slug)}
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label={`Смотреть демо: ${design.title}`}
         className="group/preview relative block h-[204px] overflow-hidden rounded-[15px] sm:h-[340px] sm:rounded-[18px]"
       >
@@ -111,8 +109,6 @@ export function DesignCard({ design }: { design: InviteRecord }) {
         </a>
         <a
           href={demoHref(design.slug)}
-          target="_blank"
-          rel="noopener noreferrer"
           aria-label={`Смотреть демо: ${design.title}`}
           className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border text-[#5A1826] transition-colors hover:bg-[#5A1826]/5 sm:flex"
           style={{ borderColor: "rgba(90,24,38,.28)" }}

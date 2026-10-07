@@ -63,6 +63,9 @@ public/invites/ваш-slug/
    напрямую — он сам подставит значения из `data.json` (включая имя/места
    гостя из `?g=`/`?n=`, таймер, списки программы/фото, музыку). Полный список
    возможностей — в комментарии в начале `public/shared/invite-data.js`.
+   Добавьте так же `<script src="/shared/invite-back.js" defer></script>` —
+   плавающая кнопка «Назад» (работает в любом дизайне независимо от
+   `invite-data.js`, не зависит от `data.json`).
    Заполните `data.json` (схема — см. `src/types/index.ts` → `InviteData`,
    валидируется zod'ом в `src/lib/invite-data-schema.ts`) и `meta.json`
    (`title`, `category`, `type`, `price`, `author`, `hostKey`, `published`) —
@@ -212,6 +215,7 @@ public/invites/[slug]/  — каждое приглашение: index.html, dat
                            cover.jpg, свои css/js/картинки/шрифты/музыка (см. п.2)
 public/invites/_template/ — заготовка для нового приглашения
 public/shared/invite-data.js — общий скрипт: подставляет data.json в index.html (см. п.2)
+public/shared/invite-back.js — плавающая кнопка «Назад» на странице приглашения (см. п.2)
 src/
   site.config.ts        — все настройки бизнеса (см. п.1)
   types/                — общие типы (InviteMeta, InviteRecord, InviteData, Guest, Order, ...)
