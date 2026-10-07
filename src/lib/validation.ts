@@ -30,7 +30,7 @@ export const orderStepContactsSchema = z.object({
 export const orderSchema = z.object({
   designSlug: z.string().optional(),
   designName: z.string().optional(),
-  packageId: z.enum(["basic", "photo", "premium"], { message: "Выберите пакет" }),
+  packageId: z.enum(["basic", "premium"], { message: "Выберите пакет" }),
   hosts: z.string().trim().optional(),
   ...orderStepEventSchema.shape,
   ...orderStepContactsSchema.shape,

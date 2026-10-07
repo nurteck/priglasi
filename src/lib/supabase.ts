@@ -8,7 +8,7 @@ let warned = false;
 function warnMissing() {
   if (!warned) {
     console.warn(
-      "[Salтanat] Ключи Supabase не заданы (.env.local). Заказы и RSVP не будут сохраняться в базу, " +
+      "[Salтanat] Ключи Supabase не заданы (.env.local). Заказы и гости не будут сохраняться в базу, " +
         "но заявки всё равно уйдут в WhatsApp. Смотрите README.md → раздел Supabase."
     );
     warned = true;
@@ -24,7 +24,7 @@ export function getSupabaseClient(): SupabaseClient | null {
   return createClient(url, anonKey);
 }
 
-/** Клиент с сервисным ключом для API-роутов (запись в orders/rsvps). Использовать только на сервере! */
+/** Клиент с сервисным ключом для API-роутов (запись в orders/guests). Использовать только на сервере! */
 export function getSupabaseAdminClient(): SupabaseClient | null {
   if (!url || !serviceKey) {
     warnMissing();

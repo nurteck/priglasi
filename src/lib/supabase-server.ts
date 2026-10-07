@@ -7,7 +7,7 @@ const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 /**
  * Клиент Supabase с сессией пользователя (cookies) для серверных компонентов
  * и route-хендлеров админки — только чтобы узнать, кто вошёл (auth.getUser()).
- * Для запросов к данным (orders/designs/rsvps) по-прежнему используйте
+ * Для запросов к данным (orders/guests) по-прежнему используйте
  * getSupabaseAdminClient() из "@/lib/supabase" — так и было в проекте раньше.
  */
 export async function getSupabaseServerClient() {

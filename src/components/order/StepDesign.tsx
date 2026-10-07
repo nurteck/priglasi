@@ -126,7 +126,7 @@ export function StepDesign({
           Пакет
         </legend>
 
-        <div role="radiogroup" aria-label="Пакет услуг" className="mt-5 grid gap-3 sm:grid-cols-3">
+        <div role="radiogroup" aria-label="Пакет услуг" className="mt-5 grid gap-3 sm:grid-cols-2">
           {siteConfig.packages.map((pkg) => {
             const selected = packageId === pkg.id;
             return (

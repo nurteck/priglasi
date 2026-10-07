@@ -9,7 +9,7 @@ export type CategoryId =
   | "tushoo"
   | "jubilee";
 
-export type PackageId = "basic" | "photo" | "premium";
+export type PackageId = "basic" | "premium";
 
 export interface Category {
   id: CategoryId;
