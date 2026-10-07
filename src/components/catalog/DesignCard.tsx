@@ -1,14 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import { Eye } from "lucide-react";
+import { Eye, MessageCircle } from "lucide-react";
 import type { InviteRecord } from "@/types";
 import { categoryLabels } from "@/content/categories";
 import { siteConfig } from "@/site.config";
 import { waLink, buildDesignOrderText } from "@/lib/whatsapp";
 import { formatSom } from "@/lib/format";
+import { Modal } from "@/components/ui/Modal";
 
 const demoHref = (slug: string) => `/invites/${slug}/?g=${encodeURIComponent("Урматтуу коноктор")}&n=2`;
 
 export function DesignCard({ design }: { design: InviteRecord }) {
+  const [open, setOpen] = useState(false);
   const savings = design.oldPrice ? design.oldPrice - design.price : 0;
   const demoUrl = `${siteConfig.url}/invites/${design.slug}/`;
   const orderText = buildDesignOrderText(design.title, demoUrl);
@@ -17,10 +22,11 @@ export function DesignCard({ design }: { design: InviteRecord }) {
     <article
       className="group flex h-full flex-col rounded-[24px] bg-[#FFFCF7] p-3 shadow-[0_0_0_1px_rgba(199,154,91,.22)] transition-[transform,box-shadow] duration-300 [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-[0_30px_60px_-30px_rgba(90,24,38,.35),0_0_0_1px_rgba(199,154,91,.45)] active:scale-[.98] [@media(hover:hover)]:active:scale-100"
     >
-      <a
-        href={demoHref(design.slug)}
-        aria-label={`Смотреть демо: ${design.title}`}
-        className="group/preview relative block h-[204px] overflow-hidden rounded-[15px] sm:h-[340px] sm:rounded-[18px]"
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={`Дизайн «${design.title}»: выбрать действие`}
+        className="group/preview relative block h-[204px] w-full overflow-hidden rounded-[15px] text-left sm:h-[340px] sm:rounded-[18px]"
       >
         <Image
           src={design.cover}
@@ -51,10 +57,10 @@ export function DesignCard({ design }: { design: InviteRecord }) {
           </div>
         )}
 
-        {/* Десктоп: затемнение + подсказка «Открыть демо» на ховере */}
+        {/* Десктоп: затемнение + подсказка на ховере */}
         <div className="pointer-events-none absolute inset-0 hidden items-end justify-center bg-gradient-to-t from-black/55 via-black/0 to-black/0 opacity-0 transition-opacity duration-300 [@media(hover:hover)]:group-hover/preview:opacity-100 sm:flex">
           <span className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#F7F0E6]">
-            <Eye size={16} aria-hidden="true" /> Открыть демо
+            <Eye size={16} aria-hidden="true" /> Смотреть и заказать
           </span>
         </div>
 
@@ -66,7 +72,7 @@ export function DesignCard({ design }: { design: InviteRecord }) {
         >
           <Eye size={14} color="#F7F0E6" />
         </span>
-      </a>
+      </button>
 
       <p className="mt-3 text-[11px] font-medium uppercase tracking-[.2em]" style={{ color: "#9A6B3A" }}>
         {categoryLabels[design.category]}
@@ -107,15 +113,52 @@ export function DesignCard({ design }: { design: InviteRecord }) {
         >
           Заказать
         </a>
-        <a
-          href={demoHref(design.slug)}
-          aria-label={`Смотреть демо: ${design.title}`}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={`Дизайн «${design.title}»: выбрать действие`}
           className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border text-[#5A1826] transition-colors hover:bg-[#5A1826]/5 sm:flex"
           style={{ borderColor: "rgba(90,24,38,.28)" }}
         >
           <Eye size={18} aria-hidden="true" />
-        </a>
+        </button>
       </div>
+
+      <Modal open={open} onClose={() => setOpen(false)} title={design.title}>
+        <div className="relative mx-auto h-28 w-24 overflow-hidden rounded-xl">
+          <Image src={design.cover} alt="" fill sizes="96px" className="object-cover object-top" />
+        </div>
+        <p className="mt-3 text-center text-[11px] font-medium uppercase tracking-[.2em]" style={{ color: "#9A6B3A" }}>
+          {categoryLabels[design.category]}
+        </p>
+        <h3
+          className="text-center text-2xl"
+          style={{ fontFamily: "var(--font-cormorant), serif", color: "#2A0C12" }}
+        >
+          {design.title}
+        </h3>
+        <p className="mt-1 text-center text-base font-bold" style={{ color: "#5A1826" }}>
+          {formatSom(design.price)}
+        </p>
+
+        <div className="mt-5 flex flex-col gap-2.5">
+          <a
+            href={demoHref(design.slug)}
+            className="flex h-12 items-center justify-center gap-2 rounded-full border text-sm font-medium transition-colors hover:bg-[#5A1826]/5"
+            style={{ borderColor: "rgba(90,24,38,.28)", color: "#5A1826" }}
+          >
+            <Eye size={16} aria-hidden="true" /> Смотреть демо
+          </a>
+          <a
+            href={waLink(orderText)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 items-center justify-center gap-2 rounded-full bg-[#5A1826] text-sm font-medium text-[#F7F0E6] transition-colors hover:bg-[#7A2233]"
+          >
+            <MessageCircle size={16} aria-hidden="true" /> Заказать этот дизайн
+          </a>
+        </div>
+      </Modal>
     </article>
   );
 }
