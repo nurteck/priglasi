@@ -1,0 +1,12 @@
+{
+  "title": "Название дизайна (например Golden Arch)",
+  "category": "wedding",
+  "type": "catalog",
+  "price": 2500,
+  "oldPrice": 3500,
+  "badges": ["new"],
+  "order": 99,
+  "author": "Имя автора",
+  "hostKey": "придумайте-длинный-случайный-ключ",
+  "published": false
+}

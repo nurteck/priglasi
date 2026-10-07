@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Чакыруу</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    background: #1E080D;
+    color: #F6EFE6;
+    font-family: Georgia, serif;
+    text-align: center;
+    padding: 24px;
+  }
+  h1 { font-weight: 500; }
+  .accent { color: #D8B27A; }
+  [data-countdown] { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+  [data-countdown][data-countdown-state="past"] [data-countdown-live] { display: none; }
+  [data-countdown-past] { display: none; }
+  [data-countdown][data-countdown-state="past"] [data-countdown-past] { display: block; }
+  [data-list="program"] { list-style: none; padding: 0; margin-top: 16px; }
+</style>
+</head>
+<body>
+  <div>
+    <h1><span data-field="couple.one"></span> &amp; <span data-field="couple.two"></span></h1>
+    <p data-field="venue.name"></p>
+    <p data-field="venue.address"></p>
+
+    <p>
+      <span>Урматтуу </span><span data-field="guest.name">коноктор</span>!
+    </p>
+    <p data-field="inviteText"></p>
+
+    <div data-countdown>
+      <div data-countdown-live>
+        <span data-countdown-unit="days"></span>күн
+        <span data-countdown-unit="hours"></span>саат
+        <span data-countdown-unit="minutes"></span>мүнөт
+        <span data-countdown-unit="seconds"></span>сек
+      </div>
+      <p data-countdown-past>Той өтүп кетти. Биз менен бирге болгонуңуз үчүн рахмат!</p>
+    </div>
+
+    <ul data-list="program">
+      <li><span data-field="time"></span> — <span data-field="title"></span></li>
+    </ul>
+
+    <audio data-music controls></audio>
+  </div>
+
+  <!--
+    Все тексты (имена, дата, место, программа и т.д.) — в data.json рядом с
+    этим файлом, не здесь. Правьте data.json, а не вёрстку. Любые свои
+    css/js/картинки/шрифты — рядом, пути только относительные. Полный список
+    доступных data-field — в public/shared/invite-data.js.
+  -->
+  <script src="/shared/invite-data.js" defer></script>
+</body>
+</html>

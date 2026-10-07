@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Manrope, Marck_Script } from "next/font/google";
+import { Playfair_Display, Manrope, Marck_Script, Cormorant_Garamond } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
@@ -24,6 +24,14 @@ const marckScript = Marck_Script({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   ...pageMetadata({
     title: siteConfig.tagline,
@@ -44,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ru"
-      className={`${playfair.variable} ${manrope.variable} ${marckScript.variable} h-full antialiased`}
+      className={`${playfair.variable} ${manrope.variable} ${marckScript.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text font-body">
         <script

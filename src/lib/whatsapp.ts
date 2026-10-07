@@ -1,4 +1,5 @@
 import { siteConfig } from "@/site.config";
+import { formatSom } from "@/lib/format";
 import type { OrderInput } from "@/types";
 
 /** Ссылка на WhatsApp с заранее заполненным текстом. */
@@ -7,39 +8,45 @@ export function waLink(text: string, phone: string = siteConfig.whatsapp): strin
   return `https://wa.me/${clean}?text=${encodeURIComponent(text)}`;
 }
 
-/** Текст заявки на заказ дизайна прямо из каталога. */
-export function buildCatalogOrderText(params: {
-  designName: string;
-  demoUrl: string;
-  packageName: string;
-  price: number;
-}): string {
-  const { designName, demoUrl, packageName, price } = params;
-  return `Здравствуйте! Хочу заказать приглашение. Дизайн: ${designName}. Демо: ${demoUrl}. Пакет: ${packageName}. Цена: ${price} сом.`;
+/** Короткий текст заявки прямо с карточки дизайна в каталоге/на главной — с названием и ссылкой на демо. */
+export function buildDesignOrderText(designTitle: string, demoUrl: string): string {
+  return `Здравствуйте! Хочу заказать приглашение «${designTitle}». Демо: ${demoUrl}`;
 }
 
 const langLabel: Record<string, string> = {
-  ky: "кыргызский",
+  ky: "кыргызча",
   ru: "русский",
-  "ky-ru": "кыргызский и русский",
+  "ky-ru": "кыргызча и русский",
 };
 
-/** Полный текст заявки после мастера заказа /order. */
-export function buildOrderWizardText(order: OrderInput & { designName?: string; total: number }): string {
+/**
+ * Текст заявки после мастера заказа /order — открывается в WhatsApp на шаге 3.
+ * designLabel: название дизайна, "Подберём вместе" (если выбрана эта плитка)
+ * или undefined (дизайн пропущен) — тогда строка "Дизайн:" вообще не включается.
+ */
+export function buildOrderWizardText(
+  order: OrderInput & { designLabel?: string; total: number }
+): string {
+  const dateTime = order.date
+    ? `Дата и время: ${order.date}${order.time ? `, ${order.time}` : ""}`
+    : null;
+  const place = order.venue || order.address
+    ? `Заведение: ${[order.venue, order.address].filter(Boolean).join(", ")}`
+    : null;
+
   const lines = [
-    "Здравствуйте! Хочу оформить заявку на приглашение.",
-    order.designName ? `Дизайн: ${order.designName}` : null,
-    `Пакет: ${packageNameById(order.packageId)}`,
-    `Тип тоя: ${eventLabel(order.eventType)}`,
-    `Имена: ${order.namesFirst}${order.namesSecond ? ` и ${order.namesSecond}` : ""}`,
-    `Дата: ${order.date}${order.time ? `, ${order.time}` : ""}`,
-    order.venue ? `Заведение: ${order.venue}` : null,
-    order.address ? `Адрес: ${order.address}` : null,
-    order.hosts ? `Хозяева тоя: ${order.hosts}` : null,
-    `Язык приглашения: ${langLabel[order.lang]}`,
+    "Здравствуйте! Хочу заказать приглашение.",
+    order.designLabel ? `Дизайн: ${order.designLabel}` : null,
+    `Пакет: ${packageNameById(order.packageId)} — ${formatSom(order.total)}`,
+    `Той: ${eventLabel(order.eventType)}`,
+    order.namesFirst
+      ? `Имена: ${order.namesFirst}${order.namesSecond ? ` & ${order.namesSecond}` : ""}`
+      : null,
+    dateTime,
+    place,
+    `Язык: ${langLabel[order.lang]}`,
+    `Имя: ${order.clientName}, WhatsApp: +996 ${order.phone}`,
     order.wishes ? `Пожелания: ${order.wishes}` : null,
-    `Итого: ${order.total} сом`,
-    `Клиент: ${order.clientName}, ${order.phone}`,
   ].filter(Boolean);
   return lines.join("\n");
 }

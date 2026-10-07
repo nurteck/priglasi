@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="ky" data-palette="champagne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Айбек &amp; Айжан — 22.08.2027</title>
+<meta name="description" content="Айбек менен Айжандын тоюна чакыруу — 2027-жылдын 22-августу, 16:00, «Меридиана» ресторан">
+<meta name="theme-color" content="#FDFBF6">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Карточка для мессенджеров. Адреса обязаны быть абсолютными:
+     при смене домена эти четыре строки нужно поправить. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Айбек &amp; Айжан">
+<meta property="og:url" content="https://saltanat.kg/invites/golden-script/">
+<meta property="og:title" content="Айбек &amp; Айжан — той чакыруусу">
+<meta property="og:description" content="2027-жылдын 22-августу, 16:00 · «Меридиана» ресторан. Сиздерди күтөбүз!">
+<meta property="og:image" content="https://saltanat.kg/invites/golden-script/cover.jpg">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Айбек менен Айжан · 22.08.2027">
+<meta property="og:locale" content="ky_KG">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+/* тема и палитра проставляются ДО первой отрисовки — иначе моргнёт светлым */
+(function(){
+  var d = document.documentElement;
+  d.className = 'js';
+  try {
+    var t = localStorage.getItem('inviteTheme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (t === 'dark') d.setAttribute('data-theme', 'dark');
+    var p = localStorage.getItem('invitePalette');
+    if (p) d.setAttribute('data-palette', p);
+  } catch(e){}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300&family=Marck+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🕊️</text></svg>">
+
+<style>
+/* Каллиграфия для имён. Файл подключается локально; пока его нет,
+   имена рисует запасной Marck Script — страница не ломается.
+   В Adine Kirnberg нет кыргызских ө и ү: браузер подставит их из
+   запасного шрифта поглифно, поэтому для имён с этими буквами
+   каллиграфия будет выглядеть смешанной. */
+@font-face{
+  font-family:'Adine';
+  src:url('fonts/adinekirnberg.ttf') format('truetype');
+  font-display:swap;
+}
+
+/* ============================================================
+   ПАЛИТРЫ
+   Меняют всё сразу: акценты, рамку даты, ботанику, лепестки.
+   ============================================================ */
+html[data-palette="champagne"]{
+  --accent:#b68235; --accent-dark:#7d5411; --accent-light:#e1ad66;
+  --paper:#FDFBF6;  --branch:#7d5411;      --leaf:#c3ab7e;
+  --ink:#332e26;    --ink-soft:#6d6558;    --rule:#e6dcc7;
+}
+html[data-palette="rose"]{
+  --accent:#c0898f; --accent-dark:#7e535a; --accent-light:#e3b4b8;
+  --paper:#FFFAF9;  --branch:#8a6165;      --leaf:#d3aeb1;
+  --ink:#33292a;    --ink-soft:#6f6062;    --rule:#efdcdc;
+}
+html[data-palette="sage"]{
+  --accent:#93a88e; --accent-dark:#5b6e57; --accent-light:#b9ccb4;
+  --paper:#F9FBF7;  --branch:#61735c;      --leaf:#adc0a8;
+  --ink:#2c312a;    --ink-soft:#616a5e;    --rule:#dde6da;
+}
+html[data-palette="blue"]{
+  --accent:#93a8bb; --accent-dark:#576d80; --accent-light:#b7cada;
+  --paper:#F8FBFD;  --branch:#5c7285;      --leaf:#aabdcc;
+  --ink:#2a2f34;    --ink-soft:#5e6871;    --rule:#dae4ec;
+}
+html[data-palette="lavender"]{
+  --accent:#a79bc0; --accent-dark:#6b5f86; --accent-light:#c8bedc;
+  --paper:#FBF9FD;  --branch:#6f6389;      --leaf:#bdb2d0;
+  --ink:#2f2b36;    --ink-soft:#665f73;    --rule:#e4dfee;
+}
+
+/* ============================================================
+   ТЁМНЫЙ ВАРИАНТ — накладывается на любую палитру.
+   Бумага тёплая, не чёрная и не синеватая. Акцент поднимается
+   на светлый шаг: тёмный шаг на тёмном фоне тонет.
+   ============================================================ */
+html[data-theme="dark"]{
+  --paper:#1b1a18;
+  --surface:#282624;
+  --ink:#efe9df;
+  --ink-soft:#a9a298;
+  --rule:rgba(239,233,223,.22);                        /* запасной вариант */
+  --rule:color-mix(in srgb, #efe9df 22%, transparent);
+}
+html[data-theme="dark"][data-palette="champagne"]{
+  --accent:#e1ad66; --accent-dark:#f5cd96; --accent-light:#f5cd96;
+  --branch:#f5cd96; --leaf:#b68235;
+}
+html[data-theme="dark"][data-palette="rose"]{
+  --accent:#e3b4b8; --accent-dark:#f2d2d5; --accent-light:#f2d2d5;
+  --branch:#f2d2d5; --leaf:#c0898f;
+}
+html[data-theme="dark"][data-palette="sage"]{
+  --accent:#b9ccb4; --accent-dark:#d8e6d4; --accent-light:#d8e6d4;
+  --branch:#d8e6d4; --leaf:#93a88e;
+}
+html[data-theme="dark"][data-palette="blue"]{
+  --accent:#b7cada; --accent-dark:#d8e6f1; --accent-light:#d8e6f1;
+  --branch:#d8e6f1; --leaf:#93a8bb;
+}
+html[data-theme="dark"][data-palette="lavender"]{
+  --accent:#c8bedc; --accent-dark:#e2daf0; --accent-light:#e2daf0;
+  --branch:#e2daf0; --leaf:#a79bc0;
+}
+
+/* тёмная бумага сама даёт глубину — градиенты почти к нулю */
+html[data-theme="dark"] body::before{opacity:.07}
+/* тени заменяются свечением */
+html[data-theme="dark"] .chrome{box-shadow:0 8px 26px -20px rgba(0,0,0,.9)}
+html[data-theme="dark"] .hero-date-in{animation-name:frameGlowDark}
+@keyframes frameGlowDark{
+  0%,100%{border-color:var(--rule);box-shadow:0 0 0 0 rgba(0,0,0,0)}
+  50%{border-color:var(--accent);box-shadow:0 0 34px -6px var(--accent)}
+}
+html[data-theme="dark"] ::selection{color:#1b1a18}
+
+:root{
+  --ease:cubic-bezier(.22,.68,.32,1);
+
+  /* Каллиграфия только для имён, «&» и финальной подписи.
+     Marck Script — запасной: он рукописный и содержит кириллицу,
+     Great Vibes её не содержит и годится лишь для латиницы. */
+  --script:'Adine','Marck Script','Great Vibes',cursive;
+  --serif:'Cormorant Garamond',Georgia,serif;   /* заголовки, текст, цифры */
+  --text:'Cormorant Garamond',Georgia,serif;    /* основной текст */
+  --caps:'Montserrat','Helvetica Neue',Arial,sans-serif;  /* капсовые метки в разрядку */
+
+  --surface:var(--paper);   /* поверхность паспарту; в тёмной теме отделяется от фона */
+
+  --pad-x:clamp(16px,5vw,28px);
+  --pad-y:clamp(30px,4vh,56px);
+  --wrap:640px;
+  --safe-l:env(safe-area-inset-left,0px);
+  --safe-r:env(safe-area-inset-right,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+
+  /* обновляются из rAF на скролле */
+  --sy:0px;
+  --sp:0;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  /* Cormorant мельче Lora при том же кегле — размер поднят, чтобы
+     текст читался так же спокойно */
+  font-size:clamp(18px,1.05vw + 14.8px,22px);
+  font-weight:300;
+  line-height:1.78;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;min-height:100svh;
+  transition:background-color .7s var(--ease),color .7s var(--ease);
+}
+/* бумага: два едва заметных радиальных градиента акцентного тона */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(120% 78% at 50% -12%, var(--accent-light), transparent 62%),
+    radial-gradient(92% 58% at 50% 112%, var(--accent-light), transparent 62%);
+  opacity:.16;
+  transition:opacity .7s var(--ease);
+}
+img,svg{max-width:100%}
+button{font-family:inherit;color:inherit}
+::selection{background:var(--accent-light);color:var(--ink)}
+
+/* ============================================================
+   НИТЬ ПРОГРЕССА · ЛЕПЕСТКИ
+   ============================================================ */
+.thread{
+  position:fixed;top:0;left:0;z-index:30;
+  width:100%;height:2px;transform-origin:0 50%;
+  transform:scaleX(var(--sp));
+  background:linear-gradient(90deg,transparent,var(--accent-light) 35%,var(--accent));
+  pointer-events:none;
+}
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+
+/* ============================================================
+   ВЕРХНЯЯ ПАНЕЛЬ
+   ============================================================ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  padding-top:calc(14px + var(--safe-t));padding-bottom:12px;
+  padding-left:calc(clamp(12px,4vw,34px) + var(--safe-l));
+  padding-right:calc(clamp(12px,4vw,34px) + var(--safe-r));
+  pointer-events:none;
+}
+.topbar > *{pointer-events:auto}
+.tools{position:relative;display:flex;align-items:center;gap:8px}
+
+.chrome{
+  background:var(--paper);
+  border:1px solid var(--rule);
+  box-shadow:0 8px 22px -18px rgba(0,0,0,.4);
+  transition:border-color .7s var(--ease),background-color .7s var(--ease);
+}
+.icon-btn{
+  width:44px;height:44px;flex:0 0 44px;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;
+  color:var(--accent-dark);
+  transition:transform .45s var(--ease),color .45s var(--ease);
+}
+.icon-btn:hover{transform:translateY(-2px)}
+.icon-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+/* в светлой теме предлагаем луну, в тёмной — солнце */
+/* автопрокрутка: пока идёт — на кнопке пауза */
+#autoBtn .as-stop{display:none}
+#autoBtn.running .as-play{display:none}
+#autoBtn.running .as-stop{display:block}
+#autoBtn.running{border-color:var(--accent);color:var(--accent-dark)}
+/* пока крутим сами, плавная прокрутка из CSS только мешает */
+html.autoscrolling{scroll-behavior:auto}
+
+#themeBtn .sun-ico{display:none}
+html[data-theme="dark"] #themeBtn .sun-ico{display:block}
+html[data-theme="dark"] #themeBtn .moon-ico{display:none}
+
+/* выбор палитры */
+.pal-pop{
+  position:absolute;top:52px;right:0;
+  display:flex;gap:9px;padding:10px 12px;border-radius:999px;
+  opacity:0;transform:translateY(-6px);pointer-events:none;
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.pal-pop.open{opacity:1;transform:none;pointer-events:auto}
+.pal-pop button{
+  width:22px;height:22px;padding:0;border-radius:50%;cursor:pointer;
+  border:1px solid var(--rule);background:var(--sw);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.pal-pop button:hover{transform:scale(1.14)}
+.pal-pop button[aria-current="true"]{box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--sw)}
+
+/* ============================================================
+   СЕКЦИИ И ТИПОГРАФИКА
+   ============================================================ */
+main{position:relative;z-index:2}
+section{
+  position:relative;
+  padding-top:var(--pad-y);padding-bottom:var(--pad-y);
+  padding-left:calc(var(--pad-x) + var(--safe-l));
+  padding-right:calc(var(--pad-x) + var(--safe-r));
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto}
+/* секция, начинающаяся с разделителя, не нуждается в полном верхнем поле:
+   разделитель сам создаёт паузу, иначе пауза считается дважды */
+#invitation,#details{padding-top:clamp(16px,2.2vh,30px)}
+
+.eyebrow{
+  font-family:var(--caps);font-weight:200;
+  font-size:clamp(9.5px,2.2vw,11px);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 22px;
+}
+/* Личное обращение к гостю — не служебная метка раздела, ради него и
+   делались персональные ссылки. Поэтому «Урматтуу» уходит в тихий
+   микрокапс, а само имя стоит отдельной крупной строкой основным
+   тоном чернил: самый контрастный цвет на странице, мимо не пройти. */
+.greet{margin:0 0 clamp(18px,4vw,26px)}
+.greet-pre{
+  display:block;font-family:var(--caps);font-weight:200;
+  font-size:clamp(10px,2.3vw,11.5px);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:clamp(9px,2vw,14px);
+}
+.greet-name{
+  display:inline-block;position:relative;
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(32px,8vw,52px);letter-spacing:.04em;line-height:1.16;
+  color:var(--ink);padding-bottom:.2em;
+  word-break:break-word;
+}
+/* тонкий росчерк под именем — держит строку как подпись на карточке */
+.greet-name::after{
+  content:"";position:absolute;left:8%;right:8%;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+h2.title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(27px,5.6vw,40px);letter-spacing:.05em;line-height:1.25;
+  margin:0 0 24px;color:var(--ink);
+}
+p.lead{
+  margin:0 auto;max-width:34em;color:var(--ink-soft);
+  font-size:clamp(18px,2.6vw,21px);line-height:1.78;
+}
+p.lead + p.lead{margin-top:16px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero{
+  min-height:100vh;min-height:100svh;justify-content:center;
+  padding-top:calc(clamp(88px,13vh,140px) + var(--safe-t));
+  padding-bottom:clamp(22px,3vh,42px);
+  overflow:hidden;
+}
+.hero-invite{
+  font-family:var(--caps);font-weight:200;
+  font-size:clamp(9.5px,2.3vw,11px);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 8px;
+}
+/* имя гостя на первом экране: без него персональная ссылка выглядит общей */
+.hero-guest{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(22px,5.4vw,32px);letter-spacing:.05em;line-height:1.2;
+  color:var(--accent-dark);margin:0 0 clamp(6px,1.4vw,10px);
+  word-break:break-word;
+}
+.hero-guest[hidden]{display:none}
+/* Арка обрамляет имена: лежит фоновым слоем, текст стоит в её проёме.
+   Отступ сверху — доля от ширины арки, тогда имена попадают в одну и ту же
+   точку проёма на любом экране. */
+.hero-stage{
+  --aw:min(720px,100vw - 16px);
+  position:relative;width:100%;
+  padding-top:calc(var(--aw) * .215);
+}
+/* параллакс — на обёртке, входящая анимация — на самой svg (transform не делится) */
+.arch-par{
+  position:absolute;top:0;left:calc(50% - var(--aw) / 2);width:var(--aw);
+  transform:translateY(calc(var(--sy) * .13));
+  will-change:transform;z-index:0;pointer-events:none;
+}
+.arch{display:block;width:100%;height:auto}
+.hero-stage-in{position:relative;z-index:1}
+
+/* Каллиграфия: межстрочный меньше единицы, чтобы росчерки соседних строк
+   заходили друг в друга; трекинг не добавлять — он рвёт связки букв */
+.names{
+  font-family:var(--script);font-weight:400;
+  font-size:clamp(52px,15vw,128px);line-height:.96;letter-spacing:0;
+  color:var(--accent);margin:0;
+}
+.amp{display:block;margin:-2px 0}
+.amp i{
+  display:inline-block;font-style:normal;
+  font-family:var(--script);letter-spacing:0;
+  font-size:clamp(26px,7.5vw,64px);color:var(--accent-light);
+  transform-origin:50% 60%;animation:ampSway 5.4s ease-in-out infinite;
+}
+@keyframes ampSway{
+  0%,100%{transform:rotate(-5deg) scale(1)}
+  50%{transform:rotate(5deg) scale(1.07)}
+}
+
+.hero-date{display:inline-block;margin-top:clamp(26px,5vw,38px)}
+/* мерцание живёт на внутреннем слое — иначе постоянная анимация
+   перебивает входящую и элемент остаётся невидимым */
+.hero-date-in{
+  display:flex;flex-direction:column;align-items:center;
+  padding:16px clamp(22px,6vw,34px);
+  border:1px solid var(--accent);
+  animation:frameGlow 4.6s ease-in-out infinite;
+}
+@keyframes frameGlow{
+  0%,100%{border-color:var(--rule);box-shadow:0 0 0 0 rgba(0,0,0,0)}
+  50%{border-color:var(--accent);box-shadow:0 0 24px -8px var(--accent)}
+}
+.d-day{
+  font-family:var(--serif);font-weight:300;font-variant-numeric:tabular-nums;
+  font-size:clamp(26px,6.6vw,40px);letter-spacing:.09em;color:var(--accent-dark);line-height:1.15;
+}
+.d-sub{
+  font-family:var(--caps);font-weight:200;font-size:clamp(9.5px,2.2vw,10.5px);
+  letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin-top:9px;
+}
+.scroll-cue{
+  margin-top:clamp(22px,3.6vh,40px);display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--caps);font-weight:200;font-size:9.5px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--ink-soft);
+}
+.scroll-cue i{
+  display:block;width:1px;height:36px;
+  background:linear-gradient(180deg,var(--accent),transparent);
+  animation:cueDrift 2.4s ease-in-out infinite;
+}
+@keyframes cueDrift{0%,100%{transform:scaleY(.4);opacity:.35}50%{transform:scaleY(1);opacity:1}}
+
+/* ============================================================
+   РАЗДЕЛИТЕЛЬ
+   ============================================================ */
+.divider{display:block;margin:0 auto clamp(16px,4vw,24px);width:min(280px,74vw);height:auto;overflow:visible}
+.dv-line{stroke:var(--accent);stroke-width:1;opacity:.7}
+.dv-dia{fill:none;stroke:var(--accent);stroke-width:1}
+.dv-core{fill:var(--accent)}
+/* базовый поворот 45° — на внешней <g> атрибутом, вращение — на внутренней */
+.dv-spin{transform-box:fill-box;transform-origin:50% 50%;animation:diaSpin 10s ease-in-out infinite}
+@keyframes diaSpin{
+  0%,100%{transform:rotate(0deg) scale(1);opacity:.85}
+  50%{transform:rotate(45deg) scale(1.1);opacity:1}
+}
+
+/* ============================================================
+   ОТСЧЁТ
+   ============================================================ */
+.countdown{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(8px,2.4vw,18px);max-width:560px;margin:6px auto 0;
+}
+.cd-cell{
+  padding:clamp(14px,3vw,22px) 6px;border:1px solid var(--rule);
+  transition:border-color .7s var(--ease);
+}
+.cd-num{
+  display:block;font-family:var(--serif);font-weight:300;
+  font-size:clamp(28px,7.4vw,42px);line-height:1;
+  color:var(--accent-dark);font-variant-numeric:tabular-nums;
+}
+.cd-num.tick{animation:tickPop .5s var(--ease)}
+@keyframes tickPop{0%{transform:translateY(-6px);opacity:.3}100%{transform:none;opacity:1}}
+.cd-lbl{
+  display:block;margin-top:12px;font-family:var(--caps);font-weight:200;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);
+}
+.cd-note{
+  margin-top:16px;color:var(--accent-dark);font-style:italic;
+  font-size:clamp(18px,2.5vw,20px);min-height:1.8em;
+}
+
+/* ============================================================
+   ДЕТАЛИ
+   ============================================================ */
+.details{
+  display:grid;gap:clamp(16px,4vw,24px);
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  margin:4px auto 0;max-width:620px;
+}
+.card{
+  padding:30px 22px;border:1px solid var(--rule);background:transparent;
+  transition:border-color .5s var(--ease);
+}
+.card:hover{border-color:var(--accent)}
+.card .c-ico{color:var(--accent);margin-bottom:13px}
+.card .c-ico svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.card h3{
+  margin:0 0 9px;font-family:var(--caps);font-weight:200;
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);
+}
+.card .c-main{
+  font-family:var(--serif);font-weight:300;font-variant-numeric:tabular-nums;
+  font-size:clamp(21px,4.4vw,27px);color:var(--accent-dark);letter-spacing:.04em;
+}
+.card .c-sub{font-size:17px;color:var(--ink-soft);margin-top:6px;line-height:1.55}
+
+
+/* ============================================================
+   КНОПКИ — только контур
+   ============================================================ */
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.btn{
+  appearance:none;cursor:pointer;position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 26px;border:1px solid var(--accent);background:transparent;
+  color:var(--accent-dark);text-decoration:none;
+  font-family:var(--caps);font-weight:300;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  transition:color .45s var(--ease),border-color .45s var(--ease),transform .35s var(--ease);
+}
+.btn::after{
+  content:"";position:absolute;inset:0;background:var(--accent);
+  opacity:0;transition:opacity .45s var(--ease);z-index:0;
+}
+.btn:hover::after{opacity:.09}
+.btn:hover{border-color:var(--accent-dark);color:var(--accent-dark)}
+.btn > *{position:relative;z-index:1}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.btn:active{transform:scale(.98)}
+
+[hidden]{display:none !important}
+
+/* ============================================================
+   ПОДПИСЬ
+   ============================================================ */
+#signature{padding-bottom:clamp(44px,7vh,72px);overflow:hidden}
+/* Той ээлери — по кыргызскому обычаю гостей зовут родители, поэтому
+   в финале стоят их имена. Набраны крупным курсивом Cormorant, а не
+   каллиграфией: в Adine нет некоторых кыргызских букв (ң, ү, ө), и
+   такое имя разорвалось бы подстановкой запасного шрифта посреди слова. */
+.p-names{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(34px,9vw,62px);line-height:1.12;letter-spacing:.015em;
+  color:var(--accent);margin:8px 0 18px;
+}
+/* служебные фразы — курсив основного шрифта, не каллиграфия */
+.sign-note{color:var(--ink-soft);font-style:italic;font-size:clamp(18px,2.7vw,21px);margin:0}
+
+.spray-par{transform:translateY(calc((1 - var(--sp)) * 34px));will-change:transform}
+.spray{width:min(430px,88vw);margin:26px auto 0;display:block}
+
+/* ============================================================
+   БОТАНИКА
+   ============================================================ */
+.branch{transform-box:fill-box;transform-origin:var(--org,50% 100%);animation:sway 7s ease-in-out infinite}
+.branch.b2{animation-duration:8.4s;animation-delay:-2.1s}
+.branch.b3{animation-duration:6.4s;animation-delay:-1.2s}
+@keyframes sway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
+.stem{fill:none;stroke:var(--branch);stroke-width:1.5;stroke-linecap:round;opacity:.5}
+.leaf{fill:var(--leaf)}
+.leaf.a{fill:var(--accent)}
+.bud{fill:var(--accent)}
+.bloom-pos .bloom{transform-box:fill-box;transform-origin:50% 50%;animation:bloomPulse 4.8s ease-in-out infinite}
+@keyframes bloomPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.bloom .petal{fill:var(--accent-light)}
+.bloom .core{fill:var(--accent)}
+
+/* ============================================================
+   ПОЯВЛЕНИЕ
+   Раскрытие ведётся АТРИБУТОМ [data-revealed], а не inline-стилями:
+   перерисовка от таймера отсчёта затирала бы их.
+   ============================================================ */
+.js [data-rv]{opacity:0;transform:translateY(26px);filter:blur(9px)}
+.js [data-revealed] [data-rv],
+.js [data-rv][data-revealed]{
+  opacity:1;transform:none;filter:blur(0);
+  transition:opacity 1s var(--ease) var(--d,0s),
+             transform 1s var(--ease) var(--d,0s),
+             filter 1s var(--ease) var(--d,0s);
+}
+/* арка приходит сверху */
+.js .arch{opacity:0;transform:translateY(-22px) scale(.972)}
+.js [data-revealed] .arch{
+  opacity:1;transform:none;
+  transition:opacity 1.5s var(--ease) var(--d,0s),transform 1.6s var(--ease) var(--d,0s);
+}
+/* сборка по словам */
+.js .w{display:inline-block;opacity:0;transform:translateY(.42em);filter:blur(8px)}
+.js [data-revealed] .w{
+  opacity:1;transform:none;filter:blur(0);
+  transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease);
+  transition-delay:calc(var(--d,0s) + var(--i,0) * .045s);
+}
+/* прорисовка стеблей и линий */
+.js .stem,.js .dv-line{stroke-dasharray:1;stroke-dashoffset:1}
+.js [data-revealed] .stem,.js [data-revealed] .dv-line{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 1.9s var(--ease) var(--d,0s);
+}
+/* листья распускаются по одному */
+.js .leaf,.js .bud{opacity:0}
+.js [data-revealed] .leaf,.js [data-revealed] .bud{
+  opacity:var(--o,.9);
+  transition:opacity .55s ease calc(var(--d,0s) + .3s + var(--i,0) * .055s);
+}
+.js .bloom-pos{opacity:0}
+.js [data-revealed] .bloom-pos{opacity:1;transition:opacity .9s var(--ease) calc(var(--d,0s) + 1.1s)}
+
+/* ============================================================
+   ЗАНОВО · ТОСТ
+   ============================================================ */
+.replay{
+  position:fixed;z-index:20;
+  right:calc(clamp(12px,4vw,34px) + var(--safe-r));
+  bottom:calc(clamp(12px,4vw,28px) + var(--safe-b));
+  display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+  padding:12px 19px;border-radius:999px;color:var(--accent-dark);
+  font-family:var(--caps);font-weight:300;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  transition:transform .4s var(--ease)}
+.replay:hover{transform:translateY(-2px)}
+.replay svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .8s var(--ease)}
+.replay:hover svg,.replay.spin svg{transform:rotate(-360deg)}
+
+.toast{
+  position:fixed;left:50%;bottom:calc(26px + var(--safe-b));transform:translate(-50%,18px);
+  z-index:40;padding:12px 24px;max-width:calc(100vw - 32px);text-align:center;
+  background:var(--ink);color:var(--paper);font-size:15px;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (min-width:768px){
+  :root{--wrap:700px}
+  .hero-stage{--aw:min(760px,88vw)}
+  .spray{width:min(480px,64vw)}
+  .details{max-width:none}
+}
+@media (min-width:1024px){
+  :root{--wrap:720px}
+  .hero-stage{--aw:min(820px,68vw)}
+}
+@media (max-width:600px){
+  .countdown{gap:7px}
+  .cd-cell{padding:15px 2px}
+  .cd-lbl{font-size:9.5px;letter-spacing:.1em}
+  .btn{padding:13px 20px;font-size:11.5px;letter-spacing:.18em}
+  .actions{gap:10px}
+  .card{padding:26px 18px}
+  .replay{padding:11px 15px}
+}
+@media (max-width:380px){
+  :root{--pad-x:14px}
+  .cd-cell{padding:12px 1px}
+  .cd-num{font-size:25px}
+  .cd-lbl{font-size:8.5px;letter-spacing:.04em}
+  .countdown{gap:5px}
+  .eyebrow,.hero-invite{letter-spacing:.26em}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .btn{width:100%;justify-content:center}
+  .lang button{padding:9px 11px;letter-spacing:.1em}
+  /* три кнопки справа + переключатель языка должны уместиться в 320px */
+  .icon-btn{width:40px;height:40px;flex-basis:40px}
+  .tools{gap:6px}
+  .replay span{display:none}
+  .replay{padding:12px;border-radius:50%}
+  .pal-pop{gap:7px;padding:9px 10px}
+}
+@media (max-width:300px){
+  .countdown{grid-template-columns:repeat(2,1fr)}
+  .hero-stage{--aw:100vw}
+}
+@media (orientation:landscape) and (max-height:560px){
+  :root{--pad-y:26px}
+  #hero{min-height:auto;padding-top:calc(66px + var(--safe-t));padding-bottom:40px}
+  .hero-stage{--aw:min(480px,48vw)}
+  .names{font-size:clamp(38px,10vh,64px)}
+  .amp i{font-size:clamp(20px,5vh,32px)}
+  .scroll-cue{display:none}
+  .divider{margin:0 auto 16px}
+}
+@media (orientation:landscape) and (min-height:561px) and (min-width:900px){
+  .hero-stage{--aw:min(720px,54vw)}
+}
+@media (hover:none){
+  .card:hover{border-color:var(--rule)}
+  .btn:hover::after{opacity:0}
+  .btn:hover{border-color:var(--accent);color:var(--accent-dark)}
+  .icon-btn:hover,.replay:hover{transform:none}
+  .replay:hover svg{transform:none}
+  .btn:active::after{opacity:.12}
+}
+@media (pointer:coarse){
+  .btn{min-height:48px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition-duration:.01ms !important}
+  .js [data-rv],.js .w,.js .arch,.js .bloom-pos{opacity:1 !important;transform:none !important;filter:none !important}
+  .js .leaf,.js .bud{opacity:var(--o,.9) !important}
+  .js .stem,.js .dv-line{stroke-dashoffset:0 !important}
+  .arch-par,.spray-par{transform:none !important}
+}
+</style>
+</head>
+
+<body>
+
+<div class="thread" aria-hidden="true"></div>
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<!-- ====================== ВЕРХНЯЯ ПАНЕЛЬ ====================== -->
+<div class="topbar">
+  <button type="button" class="icon-btn chrome" id="autoBtn" aria-label="Автопрокрутка" aria-pressed="false">
+    <svg class="as-play" viewBox="0 0 24 24"><path d="M12 4v14"/><path d="m6.5 12.5 5.5 5.5 5.5-5.5"/></svg>
+    <svg class="as-stop" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg>
+  </button>
+
+  <div class="tools">
+    <div class="pal-pop chrome" id="palPop" role="group" aria-label="Палитра"></div>
+    <button type="button" class="icon-btn chrome" id="palBtn" aria-label="Палитра">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.5-1.4-1.8-1.4-3 0-.9.7-1.6 1.7-1.6H16a5 5 0 0 0 5-5c0-3.6-4-6.6-9-6.6Z"/><circle cx="7.8" cy="12" r="1"/><circle cx="9.8" cy="8" r="1"/><circle cx="14.2" cy="7.4" r="1"/></svg>
+    </button>
+    <button type="button" class="icon-btn chrome" id="themeBtn" aria-label="Тёмная тема" aria-pressed="false">
+      <svg class="moon-ico" viewBox="0 0 24 24"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8 8.6 8.6 0 1 0 20.2 14.6Z"/></svg>
+      <svg class="sun-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5 7 7M17 17l1.5 1.5M18.5 5.5 17 7M7 17l-1.5 1.5"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+
+<!-- ====================== HERO ====================== -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hero-invite" data-rv style="--d:.5s" data-i18n="heroInvite">Той чакыруусу</p>
+    <!-- имя из ссылки: гость должен увидеть его сразу, не листая -->
+    <p class="hero-guest" data-rv style="--d:.62s" id="heroGuest" hidden></p>
+
+    <div class="hero-stage">
+      <div class="arch-par">
+        <svg class="arch" style="--d:.05s" id="archSvg" viewBox="0 0 800 620" aria-hidden="true"></svg>
+      </div>
+
+      <div class="hero-stage-in">
+        <h1 class="names">
+          <span data-rv style="--d:.8s;display:block" data-i18n="groom">Айбек</span>
+          <span class="amp" data-rv style="--d:.95s"><i>&amp;</i></span>
+          <span data-rv style="--d:1.1s;display:block" data-i18n="bride">Айжан</span>
+        </h1>
+
+        <div class="hero-date" data-rv style="--d:1.35s">
+          <div class="hero-date-in">
+            <span class="d-day" data-i18n="dateNum">22.08.2027</span>
+            <span class="d-sub" data-i18n="timePlaceShort">16:00 · «Меридиана»</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" data-rv style="--d:1.65s">
+      <i></i>
+      <span data-i18n="scroll">Төмөн жылдырыңыз</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ПРИГЛАШЕНИЕ ====================== -->
+<section id="invitation">
+  <div class="wrap">
+    <svg class="divider" data-divider viewBox="0 0 280 24" aria-hidden="true"></svg>
+
+    <p class="greet" data-rv style="--d:.1s" id="greetEyebrow">
+      <span class="greet-pre" id="greetPre">Урматтуу</span>
+      <span class="greet-name" id="greetName">коноктор</span>
+    </p>
+    <h2 class="title" data-split style="--d:.16s" data-i18n="inviteTitle">Сиздерди чакырабыз</h2>
+    <p class="lead" data-split style="--d:.3s" data-i18n="inviteP1">Чоң кубаныч жана жүрөк толкуну менен өмүрүбүздөгү эң маанилүү күндү — эки тагдыр бир болгон күндү — биз менен бирге бөлүшүүгө чакырабыз.</p>
+    <p class="lead" data-split style="--d:.5s" data-i18n="inviteP2">Сиздердин катышууңуз жана жылуу сөзүңүз биз үчүн эң кымбат белек болот.</p>
+
+  </div>
+</section>
+
+<!-- ====================== ОТСЧЁТ ====================== -->
+<section id="countdown-sec">
+  <div class="wrap">
+    <p class="eyebrow" data-rv data-i18n="cdEyebrow">Тойго чейин</p>
+    <h2 class="title" data-split style="--d:.08s" data-i18n="cdTitle">Аз гана убакыт калды</h2>
+
+    <div class="countdown">
+      <div class="cd-cell" data-rv style="--d:.22s"><span class="cd-num" id="cdD">00</span><span class="cd-lbl" data-i18n="days">Күн</span></div>
+      <div class="cd-cell" data-rv style="--d:.32s"><span class="cd-num" id="cdH">00</span><span class="cd-lbl" data-i18n="hours">Саат</span></div>
+      <div class="cd-cell" data-rv style="--d:.42s"><span class="cd-num" id="cdM">00</span><span class="cd-lbl" data-i18n="minutes">Мүнөт</span></div>
+      <div class="cd-cell" data-rv style="--d:.52s"><span class="cd-num" id="cdS">00</span><span class="cd-lbl" data-i18n="seconds">Секунд</span></div>
+    </div>
+
+    <p class="cd-note" data-rv style="--d:.62s" id="cdNote"></p>
+  </div>
+</section>
+
+<!-- ====================== ДЕТАЛИ ====================== -->
+<section id="details">
+  <div class="wrap">
+    <svg class="divider" data-divider viewBox="0 0 280 24" aria-hidden="true"></svg>
+
+    <p class="eyebrow" data-rv style="--d:.08s" data-i18n="detailsEyebrow">Программа</p>
+    <h2 class="title" data-split style="--d:.14s" data-i18n="detailsTitle">Качан жана кайда</h2>
+
+    <div class="details">
+      <div class="card" data-rv style="--d:.3s">
+        <div class="c-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3 data-i18n="whenLbl">Убакыт</h3>
+        <div class="c-main">16:00</div>
+        <div class="c-sub" data-i18n="dateLong">2027-жылдын 22-августу</div>
+      </div>
+      <div class="card" data-rv style="--d:.44s">
+        <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <h3 data-i18n="whereLbl">Дарек</h3>
+        <div class="c-main" data-i18n="venue">«Меридиана» ресторан</div>
+        <div class="c-sub" data-i18n="addr">Бакмал айылы, Өзгөн району, Ош облусу</div>
+      </div>
+    </div>
+
+    <div class="actions" data-rv style="--d:.54s">
+      <a class="btn" id="routeBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M9 20 3 17V4l6 3 6-3 6 3v13l-6-3-6 3Z"/><path d="M9 7v13M15 4v13"/></svg>
+        <span data-i18n="route">Багыт</span>
+      </a>
+      <button class="btn" type="button" id="shareBtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17.5M15.4 6.5 8.6 10.5"/></svg>
+        <span data-i18n="share">Бөлүшүү</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ПОДПИСЬ ====================== -->
+<section id="signature">
+  <div class="wrap">
+    <p class="eyebrow" data-rv data-i18n="parentsLbl">Той ээлери</p>
+    <div class="p-names" data-rv style="--d:.16s" data-i18n="parents">Темир жана Нуржамал</div>
+    <p class="sign-note" data-split style="--d:.32s" data-i18n="signNote">Сиздерди көрүүгө абдан кубанычтабыз!</p>
+
+    <div class="spray-par">
+      <svg class="spray" style="--d:.3s" id="spraySvg" viewBox="0 0 400 120" aria-hidden="true"></svg>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button type="button" class="replay chrome" id="replayBtn">
+  <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 3v5h-5"/></svg>
+  <span data-i18n="replay">Кайрадан</span>
+</button>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+/* ============================================================
+   0. ДАННЫЕ И КОНФИГУРАЦИЯ
+   Имена, дата, место и т.д. — не здесь, а в ./data.json (см. README
+   проекта, "ДАННЫЕ ОТДЕЛЬНО ОТ ДИЗАЙНА"). Этот модуль их загружает и
+   подставляет в CONFIG/T ниже, а вся остальная логика страницы —
+   прежняя, без изменений.
+   ============================================================ */
+const DATA = await fetch('./data.json').then(r => r.json());
+
+const KY_MONTHS = [
+  'январу', 'февралу', 'марту', 'апрелине', 'майына', 'июнуна',
+  'июлуна', 'августу', 'сентябрду', 'октябрду', 'ноябрду', 'декабрду'
+];
+function formatDateLong(iso){
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${y}-жылдын ${d}-${KY_MONTHS[m - 1]}`;
+}
+function formatDateNum(iso){
+  const [y, m, d] = iso.split('-');
+  return `${d}.${m}.${y}`;
+}
+
+const CONFIG = {
+  weddingISO: `${DATA.date}T${DATA.time}:00+06:00`,   // +06:00 — Кыргызстан
+  venue: DATA.venue.name,
+  link2gis: DATA.venue.map2gis || '#',
+  leaves: true,      // листва на ветвях арки и нижнего спрея
+  falling: false,    // падающие листья на canvas — выключены
+  autoScroll: true,  // плавная автопрокрутка страницы
+  autoScrollSpeed: 78,   // пикселей в секунду
+  autoScrollDelay: 2400  // пауза после загрузки, чтобы досмотреть первый экран
+  /* Музыки на странице нет: по просьбе заказчика приглашение открывается молча. */
+};
+const root = document.documentElement;
+/* «Багыт» ведёт в 2ГИС — в Кыргызстане это основной навигатор,
+   ссылка открывается сразу в приложении */
+document.getElementById('routeBtn').href = CONFIG.link2gis;
+
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Имя гостя из ссылки: ?g=Асан. Формы обращения нет — в кыргызском
+   «Урматтуу» одинаково для всех, поэтому старый параметр f игнорируется.
+   Имя вставляется только через textContent, так что разметку из адреса
+   подсунуть нельзя; длина ограничена, чтобы вёрстку не разносило. */
+const GUEST = (() => {
+  try {
+    const v = new URLSearchParams(location.search).get('g');
+    return v ? v.trim().replace(/\s+/g, ' ').slice(0, 40) : '';
+  } catch(e){ return ''; }
+})();
+
+/* Число обращения. Рода в кыргызском нет, а число есть: одного гостя зовут
+   «сизди», семью — «сиздерди», и множественным числом к одному человеку
+   обращаться неловко. Админка кладёт его в ссылку параметром n=1 | n=2.
+   Ссылки, выписанные до этого, параметра не имеют — там ориентируемся на
+   само имя: «Асан жана Айгүл», «Асановдор үй-бүлөсү» — явное множественное.
+   Приглашение без имени — общее, оно обращается ко всем сразу. */
+const PLURAL = (() => {
+  let n = null;
+  try { n = new URLSearchParams(location.search).get('n'); } catch(e){}
+  if (n === '1') return false;
+  if (n === '2') return true;
+  if (!GUEST) return true;
+  return /(^|\s)(жана|менен|and|&)(\s|$)|,|үй-бүл|бүлөсү|балдары/i.test(GUEST);
+})();
+
+/* ============================================================
+   1. ПАЛИТРЫ
+   ============================================================ */
+const PALETTES = [
+  { id:'champagne', sw:'#b68235', ru:'Шампань',           ky:'Шампан' },
+  { id:'rose',      sw:'#c0898f', ru:'Пудровая роза',     ky:'Пудра роза' },
+  { id:'sage',      sw:'#93a88e', ru:'Шалфей',            ky:'Шалфей' },
+  { id:'blue',      sw:'#93a8bb', ru:'Дымчатый голубой',  ky:'Түтүн көгүш' },
+  { id:'lavender',  sw:'#a79bc0', ru:'Лаванда',           ky:'Лаванда' }
+];
+const palPop = document.getElementById('palPop');
+let PALETTE = localStorage.getItem('invitePalette') || 'champagne';
+if (!PALETTES.some(p => p.id === PALETTE)) PALETTE = 'champagne';
+
+PALETTES.forEach(p => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.pal = p.id;
+  b.style.setProperty('--sw', p.sw);
+  b.addEventListener('click', () => applyPalette(p.id));
+  palPop.appendChild(b);
+});
+function applyPalette(id){
+  PALETTE = id;
+  root.dataset.palette = id;
+  localStorage.setItem('invitePalette', id);
+  palPop.querySelectorAll('button').forEach(b =>
+    b.setAttribute('aria-current', String(b.dataset.pal === id)));
+  const p = PALETTES.find(x => x.id === id);
+  palPop.querySelectorAll('button').forEach(b => {
+    const q = PALETTES.find(x => x.id === b.dataset.pal);
+    b.title = q ? q.ky : '';
+  });
+  // цвет лепестков берётся из текущей палитры
+  readPetalColors();
+  syncThemeColor();
+  return p;
+}
+/* тон адресной строки браузера подстраивается под бумагу */
+function syncThemeColor(){
+  const tc = document.querySelector('meta[name="theme-color"]');
+  if (tc) tc.setAttribute('content',
+    getComputedStyle(root).getPropertyValue('--paper').trim() || '#FDFBF6');
+}
+
+/* ---- тёмная тема: отдельная ось, работает с любой палитрой ---- */
+const themeBtn = document.getElementById('themeBtn');
+let THEME = root.dataset.theme === 'dark' ? 'dark' : 'light';
+function applyTheme(mode, persist = true){
+  THEME = mode;
+  if (mode === 'dark') root.dataset.theme = 'dark';
+  else delete root.dataset.theme;
+  if (persist) localStorage.setItem('inviteTheme', mode);
+  themeBtn.setAttribute('aria-pressed', String(mode === 'dark'));
+  readPetalColors();     // лепестки берут светлые тона палитры
+  syncThemeColor();
+}
+themeBtn.addEventListener('click', () => applyTheme(THEME === 'dark' ? 'light' : 'dark'));
+/* пока гость не трогал переключатель — следуем за системной темой,
+   но выбор при этом не запоминаем, иначе он «прилипнет» */
+const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+if (mqDark.addEventListener) mqDark.addEventListener('change', e => {
+  if (!localStorage.getItem('inviteTheme')) applyTheme(e.matches ? 'dark' : 'light', false);
+});
+const palBtn = document.getElementById('palBtn');
+palBtn.addEventListener('click', (e) => { e.stopPropagation(); palPop.classList.toggle('open'); });
+document.addEventListener('click', (e) => {
+  if (!palPop.contains(e.target) && e.target !== palBtn) palPop.classList.remove('open');
+});
+
+/* ============================================================
+   2. ПЕРЕВОДЫ
+   ============================================================ */
+/* Сайт строго на кыргызском: словарь один, переключателя языков нет. */
+const T = {
+  docTitle:`${DATA.couple.one} & ${DATA.couple.two} — ${formatDateNum(DATA.date)}`,
+  heroInvite:'Той чакыруусу',
+  personalInvite:'Жеке чакыруу',
+  groom:DATA.couple.one, bride:DATA.couple.two,
+  dateLong:formatDateLong(DATA.date),
+  dateNum:formatDateNum(DATA.date),
+  timePlaceShort:`${DATA.time} · «${DATA.venue.name}»`,
+  scroll:'Төмөн жылдырыңыз',
+
+  /* строки с «сиз» идут в двух числах: к одному гостю — «сизди»,
+     к семье и к безымянному приглашению — «сиздерди» */
+  inviteTitle: PLURAL ? 'Сиздерди чакырабыз' : 'Сизди чакырабыз',
+  inviteP1:'Чоң кубаныч жана жүрөк толкуну менен өмүрүбүздөгү эң маанилүү күндү — эки тагдыр бир болгон күндү — биз менен бирге бөлүшүүгө чакырабыз.',
+  inviteP2: PLURAL
+    ? 'Сиздердин катышууңуз жана жылуу сөзүңүз биз үчүн эң кымбат белек болот.'
+    : 'Сиздин катышууңуз жана жылуу сөзүңүз биз үчүн эң кымбат белек болот.',
+
+  cdEyebrow:'Тойго чейин',
+  cdTitle:'Аз гана убакыт калды',
+  days:'Күн', hours:'Саат', minutes:'Мүнөт', seconds:'Секунд',
+  cdLive: PLURAL
+    ? 'Сиздер менен жолугууну сабырсыздык менен күтөбүз'
+    : 'Сиз менен жолугууну сабырсыздык менен күтөбүз',
+  cdToday:'Бүгүн ошол күн!',
+  cdPast:'Тоюбуз өтүп кетти. Биз менен бирге болгонуңуз үчүн рахмат!',
+
+  detailsEyebrow:'Программа',
+  detailsTitle:'Качан жана кайда',
+  whenLbl:'Убакыт', whereLbl:'Дарек',
+  venue:DATA.venue.name,
+  addr:DATA.venue.address,
+  route:'Багыт', share:'Бөлүшүү',
+
+  /* в кыргызском грамматического рода нет: «Урматтуу» одинаково подходит
+     и мужчине, и женщине, и семье — форма обращения не нужна */
+  greetPre:'Урматтуу',
+  greetAll:'коноктор',
+
+  parentsLbl:'Той ээлери',
+  parents:DATA.hosts || '',
+
+  signNote: PLURAL
+    ? 'Сиздерди көрүүгө абдан кубанычтабыз!'
+    : 'Сизди көрүүгө абдан кубанычтабыз!',
+  replay:'Кайрадан',
+
+  shareTitle:`${DATA.couple.one} менен ${DATA.couple.two}дын тою`,
+  shareText:`${formatDateLong(DATA.date)}, ${DATA.time} — «${DATA.venue.name}». Сиздерди күтөбүз!`,
+  copied:'Шилтеме көчүрүлдү',
+  copyFail:'Шилтемени көчүрүү мүмкүн болбоду'
+};
+/* разбор текста на слова: каждое слово — inline-block со своим индексом */
+function splitWords(el){
+  const text = (el.dataset.raw || el.textContent).trim();
+  el.dataset.raw = text;
+  el.textContent = '';
+  text.split(/\s+/).forEach((word, i) => {
+    const s = document.createElement('span');
+    s.className = 'w';
+    s.style.setProperty('--i', i);
+    s.textContent = word;
+    el.appendChild(s);
+    el.appendChild(document.createTextNode(' '));
+  });
+}
+function applyText(){
+  document.title = T.docTitle;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[el.dataset.i18n];
+    if (typeof v !== 'string') return;
+    el.textContent = v;
+    delete el.dataset.raw;
+  });
+  document.querySelectorAll('[data-split]').forEach(splitWords);
+  palPop.querySelectorAll('button').forEach(b => {
+    const q = PALETTES.find(x => x.id === b.dataset.pal);
+    b.title = q ? q.ky : '';
+    b.setAttribute('aria-label', q ? q.ky : '');
+  });
+
+  renderCountdown();
+  renderGreeting();     // после словаря — иначе обращение по имени затрётся
+}
+
+/* ============================================================
+   3. БОТАНИКА — генерация SVG
+   ============================================================ */
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (n, a = {}) => {
+  const e = document.createElementNS(SVGNS, n);
+  for (const k in a) e.setAttribute(k, a[k]);
+  return e;
+};
+/* точка и касательная на кубической кривой Безье */
+function bez(p, t){
+  const u = 1 - t, a = u*u*u, b = 3*u*u*t, c = 3*u*t*t, d = t*t*t;
+  const x = a*p[0].x + b*p[1].x + c*p[2].x + d*p[3].x;
+  const y = a*p[0].y + b*p[1].y + c*p[2].y + d*p[3].y;
+  const da = 3*u*u, db = 6*u*t, dc = 3*t*t;
+  const dx = da*(p[1].x-p[0].x) + db*(p[2].x-p[1].x) + dc*(p[3].x-p[2].x);
+  const dy = da*(p[1].y-p[0].y) + db*(p[2].y-p[1].y) + dc*(p[3].y-p[2].y);
+  return { x, y, ang: Math.atan2(dy, dx) * 180 / Math.PI };
+}
+const dStr = p => `M${p[0].x} ${p[0].y} C${p[1].x} ${p[1].y} ${p[2].x} ${p[2].y} ${p[3].x} ${p[3].y}`;
+
+/* лист — вытянутый «глаз»; сдвиг и поворот держим атрибутом,
+   CSS трогает только прозрачность, поэтому конфликта transform нет */
+function leaf(x, y, ang, len, w, accent, i, o){
+  const p = el('path', {
+    class: 'leaf' + (accent ? ' a' : ''),
+    d: `M0 0 C ${len*0.35} ${-w} ${len*0.75} ${-w} ${len} 0 C ${len*0.75} ${w} ${len*0.35} ${w} 0 0 Z`,
+    transform: `translate(${x} ${y}) rotate(${ang})`
+  });
+  p.style.setProperty('--i', i);
+  p.style.setProperty('--o', o);
+  return p;
+}
+/* ветвь: стебель + листья по кривой */
+function branch(pts, opts){
+  const g = el('g');
+  g.appendChild(el('path', { class:'stem', pathLength:'1', d: dStr(pts) }));
+  const n = opts.leaves;
+  let idx = 0;
+  for (let i = 0; i < n; i++){
+    const t = opts.from + (opts.to - opts.from) * (i / (n - 1 || 1));
+    const pt = bez(pts, t);
+    const grow = Math.sin(Math.PI * (0.25 + t * 0.7));     // короче у концов
+    const len = opts.len * (0.55 + 0.6 * grow);
+    const side = (i % 2 === 0) ? 1 : -1;
+    const accent = (i % 3 === 1);                          // каждый третий — акцентный
+    if (CONFIG.leaves){
+      g.appendChild(leaf(pt.x, pt.y, pt.ang + opts.spread * side, len, len * 0.30, accent, idx++, .92));
+      if (i % 3 === 0){                                    // мелкий второй ярус
+        g.appendChild(leaf(pt.x, pt.y, pt.ang - opts.spread * side * 0.65, len * 0.58, len * 0.20, !accent, idx++, .7));
+      }
+    }
+    if (i % 4 === 2){                                      // почка
+      const b = el('circle', { class:'bud', cx: pt.x, cy: pt.y, r: 2.4 });
+      b.style.setProperty('--i', idx++);
+      b.style.setProperty('--o', .75);
+      g.appendChild(b);
+    }
+  }
+  return g;
+}
+/* цветок: сдвиг — на внешней <g> атрибутом, пульсация — на внутренней */
+function bloom(cx, cy, r){
+  const pos = el('g', { class:'bloom-pos', transform:`translate(${cx} ${cy})` });
+  const g = el('g', { class:'bloom' });
+  for (let i = 0; i < 8; i++){
+    const p = el('ellipse', { class:'petal', cx:0, cy:-r*0.62, rx:r*0.30, ry:r*0.62,
+                              transform:`rotate(${i * 45})` });
+    g.appendChild(p);
+  }
+  g.appendChild(el('circle', { class:'core', cx:0, cy:0, r:r*0.30 }));
+  pos.appendChild(g);
+  return pos;
+}
+
+/* --- Арка: 4 ветви (две основные + две короткие, зеркально) --- */
+(function buildArch(){
+  const svg = document.getElementById('archSvg');
+  const L  = [ {x:44,y:620},{x:30,y:340},{x:120,y:112},{x:400,y:66} ];
+  const R  = L.map(p => ({ x: 800 - p.x, y: p.y }));
+  const L2 = [ {x:104,y:620},{x:92,y:372},{x:172,y:166},{x:392,y:118} ];
+  const R2 = L2.map(p => ({ x: 800 - p.x, y: p.y }));
+
+  const gL = branch(L, { leaves:20, len:30, spread:-34, from:.04, to:1 });
+  gL.setAttribute('class','branch'); gL.style.setProperty('--org','8% 100%');
+  const gR = branch(R, { leaves:20, len:30, spread:34, from:.04, to:1 });
+  gR.setAttribute('class','branch b2'); gR.style.setProperty('--org','92% 100%');
+
+  const gL2 = branch(L2, { leaves:13, len:20, spread:-40, from:.1, to:1 });
+  gL2.setAttribute('class','branch b3'); gL2.style.setProperty('--org','10% 100%');
+  gL2.style.setProperty('--d','.25s');
+  const gR2 = branch(R2, { leaves:13, len:20, spread:40, from:.1, to:1 });
+  gR2.setAttribute('class','branch b3'); gR2.style.setProperty('--org','90% 100%');
+  gR2.style.setProperty('--d','.25s');
+  gR2.style.animationDelay = '-3.4s';
+
+  svg.append(gL2, gR2, gL, gR, bloom(400, 74, 23));
+  [316, 484].forEach((x, i) => {
+    const b = bloom(x, 98, 11);
+    b.querySelector('.bloom').style.animationDelay = (i ? -2.3 : -1.1) + 's';
+    svg.appendChild(b);
+  });
+})();
+
+/* --- Нижний спрей --- */
+(function buildSpray(){
+  const svg = document.getElementById('spraySvg');
+  const L  = [ {x:200,y:112},{x:140,y:104},{x:78,y:74},{x:26,y:30} ];
+  const R  = L.map(p => ({ x: 400 - p.x, y: p.y }));
+  const L3 = [ {x:200,y:112},{x:158,y:118},{x:104,y:110},{x:56,y:86} ];
+  const R3 = L3.map(p => ({ x: 400 - p.x, y: p.y }));
+
+  const gL = branch(L, { leaves:10, len:20, spread:-36, from:.08, to:1 });
+  gL.setAttribute('class','branch'); gL.style.setProperty('--org','100% 100%');
+  const gR = branch(R, { leaves:10, len:20, spread:36, from:.08, to:1 });
+  gR.setAttribute('class','branch b2'); gR.style.setProperty('--org','0% 100%');
+  const gL3 = branch(L3, { leaves:7, len:15, spread:-30, from:.12, to:1 });
+  gL3.setAttribute('class','branch b3'); gL3.style.setProperty('--org','100% 100%');
+  const gR3 = branch(R3, { leaves:7, len:15, spread:30, from:.12, to:1 });
+  gR3.setAttribute('class','branch b3'); gR3.style.setProperty('--org','0% 100%');
+  gR3.style.animationDelay = '-2.8s';
+
+  svg.append(gL3, gR3, gL, gR, bloom(200, 104, 13));
+})();
+
+/* --- Разделители --- */
+document.querySelectorAll('[data-divider]').forEach(svg => {
+  svg.append(
+    el('path', { class:'dv-line', pathLength:'1', d:'M6 12 H108' }),
+    el('path', { class:'dv-line', pathLength:'1', d:'M172 12 H274' }),
+    el('path', { class:'dv-dia', d:'M116 8 L120 12 L116 16 L112 12 Z' }),
+    el('path', { class:'dv-dia', d:'M164 8 L168 12 L164 16 L160 12 Z' })
+  );
+  // базовый поворот 45° — атрибутом снаружи, вращение — классом внутри
+  const base = el('g', { transform:'rotate(45 140 12)' });
+  const spin = el('g', { class:'dv-spin' });
+  spin.append(
+    el('rect', { class:'dv-dia', x:133, y:5, width:14, height:14 }),
+    el('circle', { class:'dv-core', cx:140, cy:12, r:2.4 })
+  );
+  base.appendChild(spin);
+  svg.appendChild(base);
+});
+
+/* ============================================================
+   4. ПОЯВЛЕНИЕ + ПАРАЛЛАКС
+   ============================================================ */
+const sections = Array.from(document.querySelectorAll('section'));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.setAttribute('data-revealed',''); });
+}, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+sections.forEach(s => io.observe(s));
+
+function playIntro(){
+  const hero = document.getElementById('hero');
+  hero.removeAttribute('data-revealed');
+  void hero.offsetWidth;                       // форсируем reflow
+  requestAnimationFrame(() => hero.setAttribute('data-revealed',''));
+}
+
+/* скролл кладёт --sy (px) и --sp (0–1) на <html> через rAF */
+let ticking = false;
+function onScroll(){
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY || window.pageYOffset || 0;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    root.style.setProperty('--sy', y + 'px');
+    root.style.setProperty('--sp', Math.min(1, y / max).toFixed(4));
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+
+window.addEventListener('load', () => {
+  playIntro();
+  burstPetals(46);
+  // даём досмотреть первый экран, потом мягко трогаемся
+  setTimeout(() => { if (!userTouched) autoStart(); }, CONFIG.autoScrollDelay);
+});
+
+/* ============================================================
+   АВТОПРОКРУТКА
+   Гость в любой момент забирает управление: колесо, касание или
+   клавиша останавливают её, кнопка в углу включает снова.
+   ============================================================ */
+const autoBtn = document.getElementById('autoBtn');
+const AS = { on: false, pos: 0, last: 0, raf: 0 };
+let userTouched = false;
+
+function autoStart(){
+  if (RM || !CONFIG.autoScroll || AS.on) return;
+  AS.on = true;
+  AS.pos = window.scrollY || 0;
+  AS.last = performance.now();
+  root.classList.add('autoscrolling');
+  autoBtn.classList.add('running');
+  autoBtn.setAttribute('aria-pressed', 'true');
+  AS.raf = requestAnimationFrame(autoTick);
+}
+function autoStop(){
+  if (!AS.on) return;
+  AS.on = false;
+  cancelAnimationFrame(AS.raf);
+  root.classList.remove('autoscrolling');
+  autoBtn.classList.remove('running');
+  autoBtn.setAttribute('aria-pressed', 'false');
+}
+function autoTick(now){
+  if (!AS.on) return;
+  const dt = Math.min((now - AS.last) / 1000, 0.1);   // после сворачивания вкладки не прыгаем
+  AS.last = now;
+  AS.pos += CONFIG.autoScrollSpeed * dt;
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  if (AS.pos >= max){ window.scrollTo(0, max); autoStop(); return; }
+  window.scrollTo(0, Math.round(AS.pos));
+  AS.raf = requestAnimationFrame(autoTick);
+}
+autoBtn.addEventListener('click', () => AS.on ? autoStop() : autoStart());
+
+/* Любое действие гостя останавливает прокрутку — кроме нажатий на сами
+   кнопки управления, иначе клик по кнопке гасил бы то, что включает. */
+['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev =>
+  window.addEventListener(ev, (e) => {
+    if (e.target && e.target.closest && e.target.closest('.topbar, .replay')) return;
+    userTouched = true;
+    autoStop();
+  }, { passive: true }));
+
+const replayBtn = document.getElementById('replayBtn');
+replayBtn.addEventListener('click', () => {
+  autoStop();                       // иначе автопрокрутка потянет вниз во время подъёма
+  replayBtn.classList.add('spin');
+  setTimeout(() => replayBtn.classList.remove('spin'), 800);
+  sections.forEach(s => s.removeAttribute('data-revealed'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    playIntro();
+    burstPetals(46);
+    // переподписка: иначе наблюдатель не «увидит» уже видимые секции заново
+    sections.forEach(s => { io.unobserve(s); io.observe(s); });
+  }, RM ? 0 : 620);
+});
+
+/* ============================================================
+   5. ОБРАТНЫЙ ОТСЧЁТ
+   ============================================================ */
+const TARGET = new Date(CONFIG.weddingISO).getTime();
+const cd = {
+  d: document.getElementById('cdD'), h: document.getElementById('cdH'),
+  m: document.getElementById('cdM'), s: document.getElementById('cdS'),
+  note: document.getElementById('cdNote')
+};
+const pad = n => String(n).padStart(2, '0');
+function setNum(node, val){
+  const v = pad(val);
+  if (node.textContent === v) return;
+  node.textContent = v;
+  node.classList.remove('tick'); void node.offsetWidth; node.classList.add('tick');
+}
+function renderCountdown(){
+  const t = T;
+  const diff = TARGET - Date.now();
+  if (diff <= 0){
+    setNum(cd.d,0); setNum(cd.h,0); setNum(cd.m,0); setNum(cd.s,0);
+    cd.note.textContent = (diff > -24*3600*1000) ? t.cdToday : t.cdPast;
+    return;
+  }
+  const sec = Math.floor(diff / 1000);
+  setNum(cd.d, Math.floor(sec / 86400));
+  setNum(cd.h, Math.floor(sec / 3600) % 24);
+  setNum(cd.m, Math.floor(sec / 60) % 60);
+  setNum(cd.s, sec % 60);
+  cd.note.textContent = t.cdLive;
+}
+setInterval(renderCountdown, 1000);
+
+/* ============================================================
+   6. ОБРАЩЕНИЕ К ГОСТЮ
+   ============================================================ */
+const greetPreEl = document.getElementById('greetPre');
+const greetNameEl = document.getElementById('greetName');
+const heroInviteEl = document.querySelector('.hero-invite');
+const heroGuestEl = document.getElementById('heroGuest');
+
+/* Имя приходит только из ссылки — его задаёт админ, гость на странице
+   ничего не заполняет. Имя показываем дважды: крупной строкой в разделе
+   приглашения и сразу на первом экране, чтобы его нельзя было не заметить. */
+function renderGreeting(){
+  const t = T;
+  greetPreEl.textContent = t.greetPre;
+  greetNameEl.textContent = GUEST || t.greetAll;
+  heroInviteEl.textContent = GUEST ? t.personalInvite : t.heroInvite;
+  heroGuestEl.textContent = GUEST;
+  heroGuestEl.hidden = !GUEST;
+}
+
+/* копирование с откатом для контекстов без Clipboard API */
+async function copyText(text){
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch(err){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){}
+    ta.remove();
+    return ok;
+  }
+}
+
+/* ============================================================
+   7. ПОДЕЛИТЬСЯ
+   ============================================================ */
+const toastEl = document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => toastEl.classList.remove('show'), 2600);
+}
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const t = T;
+  const payload = { title: t.shareTitle, text: t.shareText, url: location.href };
+  if (navigator.share){
+    try { await navigator.share(payload); return; }
+    catch(err){ if (err && err.name === 'AbortError') return; }
+  }
+  toast(await copyText(location.href) ? t.copied : t.copyFail);
+});
+
+/* ============================================================
+   8. ЛЕПЕСТКИ НА CANVAS
+   ============================================================ */
+const cv = document.getElementById('petals');
+const ctx = cv.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+function resize(){
+  // на слабых мобильных ограничиваем DPR, иначе canvas съедает кадры
+  const cap = (window.innerWidth < 700 && (navigator.hardwareConcurrency || 4) <= 4) ? 1.5 : 2;
+  DPR = Math.min(window.devicePixelRatio || 1, cap);
+  W = cv.clientWidth; H = cv.clientHeight;
+  cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+resize();
+
+/* цвета лепестков читаются из активной палитры */
+let TONES = [];
+const hexRGB = h => {
+  h = h.trim().replace('#','');
+  if (h.length === 3) h = h.split('').map(c => c + c).join('');
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+};
+function readPetalColors(){
+  const cs = getComputedStyle(root);
+  TONES = ['--accent','--accent-light','--leaf','--accent-light']
+    .map(v => cs.getPropertyValue(v))
+    .filter(Boolean)
+    .map(hexRGB)
+    .map(([r,g,b]) => `rgba(${r},${g},${b},`);
+  if (!TONES.length) TONES = ['rgba(182,130,53,'];
+  petals.forEach(p => { p.c = TONES[(p.tone) % TONES.length]; });
+}
+
+const petals = [];
+const ambientCount = () =>
+  Math.round(Math.max(10, Math.min(30, (window.innerWidth * window.innerHeight) / 34000)));
+let AMBIENT = CONFIG.falling ? ambientCount() : 0;
+
+function makePetal(fromTop){
+  const tone = (Math.random() * 4) | 0;
+  return {
+    x: Math.random() * W,
+    y: fromTop ? -20 - Math.random() * H * 0.5 : Math.random() * H,
+    r: 3.2 + Math.random() * 5.2,
+    vy: 0.28 + Math.random() * 0.72,
+    vx: -0.24 + Math.random() * 0.48,
+    rot: Math.random() * Math.PI * 2,
+    vr: -0.012 + Math.random() * 0.024,
+    sway: 0.5 + Math.random() * 1.4,
+    ph: Math.random() * Math.PI * 2,
+    a: 0.3 + Math.random() * 0.45,
+    tone,
+    c: TONES.length ? TONES[tone % TONES.length] : 'rgba(182,130,53,',
+    burst: false
+  };
+}
+for (let i = 0; i < AMBIENT; i++) petals.push(makePetal(false));
+
+function burstPetals(n){
+  if (RM || !CONFIG.falling) return;
+  n = Math.max(12, Math.round(n * Math.min(1, window.innerWidth / 560)));
+  for (let i = 0; i < n; i++){
+    const p = makePetal(true);
+    p.burst = true;
+    p.vy = 0.6 + Math.random() * 1.5;
+    p.y = -20 - Math.random() * H * 0.9;
+    petals.push(p);
+  }
+}
+function drawPetal(p){
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  ctx.rotate(p.rot);
+  ctx.beginPath();
+  ctx.moveTo(0, -p.r);
+  ctx.quadraticCurveTo(p.r * 0.92, -p.r * 0.15, 0, p.r);
+  ctx.quadraticCurveTo(-p.r * 0.92, -p.r * 0.15, 0, -p.r);
+  ctx.fillStyle = p.c + p.a + ')';
+  ctx.fill();
+  ctx.restore();
+}
+let last = performance.now();
+function loop(now){
+  const dt = Math.min((now - last) / 16.67, 3); last = now;
+  ctx.clearRect(0, 0, W, H);
+  for (let i = petals.length - 1; i >= 0; i--){
+    const p = petals[i];
+    p.ph += 0.018 * dt;
+    p.y += p.vy * dt;
+    p.x += (p.vx + Math.sin(p.ph) * p.sway * 0.35) * dt;
+    p.rot += p.vr * dt;
+    if (p.y - p.r > H + 10){
+      if (p.burst){ petals.splice(i, 1); continue; }
+      p.y = -12; p.x = Math.random() * W;
+    }
+    if (p.x < -30) p.x = W + 20;
+    if (p.x > W + 30) p.x = -20;
+    drawPetal(p);
+  }
+  requestAnimationFrame(loop);
+}
+if (!RM && CONFIG.falling) requestAnimationFrame(loop);
+
+/* ресайз с дебаунсом: мелкие изменения высоты от адресной строки
+   не должны дёргать canvas на каждом кадре скролла */
+let rzT;
+function onResize(){
+  clearTimeout(rzT);
+  rzT = setTimeout(() => {
+    resize();
+    const target = CONFIG.falling ? ambientCount() : 0;
+    const ambient = petals.filter(p => !p.burst);
+    if (ambient.length < target){
+      for (let i = ambient.length; i < target; i++) petals.push(makePetal(false));
+    } else if (ambient.length > target){
+      let extra = ambient.length - target;
+      for (let i = petals.length - 1; i >= 0 && extra > 0; i--){
+        if (!petals[i].burst){ petals.splice(i, 1); extra--; }
+      }
+    }
+    AMBIENT = target;
+    onScroll();
+  }, 160);
+}
+window.addEventListener('resize', onResize);
+window.addEventListener('orientationchange', onResize);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', onResize);
+
+/* ============================================================
+   9. УХОД СО СТРАНИЦЫ
+   Автопрокрутка не должна продолжаться в скрытой вкладке: вернувшийся
+   гость иначе застаёт страницу уже пролистанной до конца.
+   ============================================================ */
+function pauseAll(){ autoStop(); }
+document.addEventListener('visibilitychange', () => { if (document.hidden) pauseAll(); });
+window.addEventListener('pagehide', pauseAll);
+/* На десктопе переход в другое окно не скрывает вкладку — visibilitychange
+   там не срабатывает, поэтому ловим ещё и потерю фокуса. */
+window.addEventListener('blur', pauseAll);
+
+/* ============================================================
+   10. СТАРТ
+   ============================================================ */
+applyTheme(THEME, false);   // тему уже проставил скрипт в <head>, здесь только досинхрон
+applyPalette(PALETTE);
+applyText();
+renderCountdown();
+</script>
+</body>
+</html>

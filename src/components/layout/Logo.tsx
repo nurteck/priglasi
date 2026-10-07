@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "", light = false }: { className?: string; light?: boolean }) {
   return (
     <Link
       href="/"
@@ -16,8 +16,12 @@ export function Logo({ className = "" }: { className?: string }) {
         {siteConfig.monogram}
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="font-heading text-lg text-text">{siteConfig.brandName}</span>
-        <span className="text-[11px] text-muted tracking-wide uppercase">{siteConfig.tagline}</span>
+        <span className={`font-heading text-lg ${light ? "text-[#F6EFE6]" : "text-text"}`}>
+          {siteConfig.brandName}
+        </span>
+        <span className={`text-[11px] tracking-wide uppercase ${light ? "text-[rgba(246,239,230,.65)]" : "text-muted"}`}>
+          {siteConfig.tagline}
+        </span>
       </span>
     </Link>
   );

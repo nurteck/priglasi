@@ -1,0 +1,12 @@
+{
+  "title": "Invitation Blue",
+  "category": "wedding",
+  "type": "catalog",
+  "price": 3000,
+  "oldPrice": 3500,
+  "badges": ["new"],
+  "order": 2,
+  "author": "Команда Салтанат",
+  "hostKey": "d5e8aeb0924216c9fbb6863645a257c6",
+  "published": true
+}

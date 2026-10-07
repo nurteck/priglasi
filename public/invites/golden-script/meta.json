@@ -1,0 +1,13 @@
+{
+  "title": "Golden Script",
+  "category": "wedding",
+  "type": "catalog",
+  "price": 3000,
+  "oldPrice": 3500,
+  "badges": ["hit"],
+  "order": 1,
+  "author": "Команда Салтанат",
+  "eventDate": "2027-08-22",
+  "hostKey": "a0a7cd122b25668e8d7a25bfb417b0dd",
+  "published": true
+}

@@ -25,7 +25,7 @@ export function OrdersTable({ orders: initial }: { orders: Order[] }) {
 
   async function changeStatus(id: string, status: OrderStatus) {
     setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
-    await fetch(`/api/admin/orders/${id}`, {
+    await fetch(`/api/admin/orders/${id}/`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),

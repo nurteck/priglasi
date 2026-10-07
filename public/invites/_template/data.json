@@ -1,0 +1,21 @@
+{
+  "couple": { "one": "Айбек", "two": "Айжан" },
+  "eventType": "wedding",
+  "date": "2027-06-01",
+  "time": "16:00",
+  "venue": {
+    "name": "Ала-Тоо",
+    "address": "Бишкек ш., Токтогул көч., 125",
+    "map2gis": "",
+    "mapGoogle": ""
+  },
+  "hosts": "Эрмек жана Гүлмира",
+  "inviteText": "Сиздерди тоюбузга чакырабыз!",
+  "program": [
+    { "time": "16:00", "title": "Конокторду тосуу" },
+    { "time": "17:00", "title": "Той башталат" }
+  ],
+  "language": "ky",
+  "photos": [],
+  "music": "music.mp3"
+}

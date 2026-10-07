@@ -1,0 +1,1 @@
+Copyright (c) Alexandra Gophmann (rusification), 2005. All rights reserved.

@@ -1,24 +1,33 @@
+"use client";
+
+import { useState } from "react";
+import { Plus, X, Upload, Music, Image as ImageIcon } from "lucide-react";
 import { categories } from "@/content/categories";
-import type { Lang } from "@/types";
+import type { CategoryId, InviteProgramItem } from "@/types";
+import { fieldClass, fieldBorder, fieldBorderError, labelClass, labelStyle, errorClass, errorStyle } from "./fieldStyles";
 
 export interface StepEventValues {
-  eventType: string;
+  eventType: CategoryId | "";
   namesFirst: string;
   namesSecond: string;
   date: string;
   time: string;
   venue: string;
   address: string;
-  hosts: string;
-  lang: Lang;
-  wishes: string;
+  program: InviteProgramItem[];
+  photos: string[];
+  music: string;
 }
 
-const langOptions: { id: Lang; label: string }[] = [
-  { id: "ky", label: "Кыргызский" },
-  { id: "ru", label: "Русский" },
-  { id: "ky-ru", label: "Оба (без доплаты)" },
-];
+async function uploadFile(file: File, kind: "photo" | "music"): Promise<string> {
+  const form = new FormData();
+  form.append("file", file);
+  form.append("kind", kind);
+  const res = await fetch("/api/uploads/", { method: "POST", body: form });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error ?? "Не удалось загрузить файл");
+  return data.url as string;
+}
 
 export function StepEvent({
   values,
@@ -29,103 +38,266 @@ export function StepEvent({
   errors: Partial<Record<keyof StepEventValues, string>>;
   onChange: <K extends keyof StepEventValues>(key: K, value: StepEventValues[K]) => void;
 }) {
-  const field = "block w-full rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm min-h-11 focus-visible:outline-2 focus-visible:outline-accent";
-  const label = "block text-sm font-medium text-text mb-1.5";
-  const errorText = "mt-1 text-xs text-accent";
+  const isWedding = values.eventType === "wedding";
+  const nameLabels = isWedding
+    ? { first: "Имя жениха", second: "Имя невесты" }
+    : { first: "Имя виновника торжества", second: "Второе имя, если есть" };
+
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
+  const [uploadingMusic, setUploadingMusic] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
+  function addProgramRow() {
+    onChange("program", [...values.program, { time: "", title: "" }]);
+  }
+  function updateProgramRow(i: number, patch: Partial<InviteProgramItem>) {
+    onChange("program", values.program.map((row, idx) => (idx === i ? { ...row, ...patch } : row)));
+  }
+  function removeProgramRow(i: number) {
+    onChange("program", values.program.filter((_, idx) => idx !== i));
+  }
+
+  async function handlePhotosSelected(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setUploadError(null);
+    setUploadingPhotos(true);
+    try {
+      const urls = await Promise.all(Array.from(files).slice(0, 10).map((f) => uploadFile(f, "photo")));
+      onChange("photos", [...values.photos, ...urls]);
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : "Не удалось загрузить фото");
+    } finally {
+      setUploadingPhotos(false);
+    }
+  }
+
+  async function handleMusicSelected(files: FileList | null) {
+    const file = files?.[0];
+    if (!file) return;
+    setUploadError(null);
+    setUploadingMusic(true);
+    try {
+      const url = await uploadFile(file, "music");
+      onChange("music", url);
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : "Не удалось загрузить музыку");
+    } finally {
+      setUploadingMusic(false);
+    }
+  }
 
   return (
-    <div className="space-y-5">
-      <h2 className="font-heading text-lg text-text">О мероприятии</h2>
+    <div className="space-y-6">
+      <h2
+        className="text-[30px] sm:text-[34px]"
+        style={{ fontFamily: "var(--font-cormorant), serif", color: "#2A0C12" }}
+      >
+        О мероприятии
+      </h2>
 
-      <div>
-        <label className={label} htmlFor="eventType">Тип тоя</label>
-        <select
-          id="eventType"
-          className={field}
-          value={values.eventType}
-          onChange={(e) => onChange("eventType", e.target.value)}
-        >
-          <option value="">Выберите тип</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>{c.label}</option>
-          ))}
-        </select>
-        {errors.eventType && <p className={errorText}>{errors.eventType}</p>}
-      </div>
+      <fieldset>
+        <legend className={labelClass} style={labelStyle}>Тип тоя</legend>
+        <div role="radiogroup" aria-label="Тип тоя" className="flex flex-wrap gap-2">
+          {categories.map((c) => {
+            const selected = values.eventType === c.id;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => onChange("eventType", c.id)}
+                className="flex h-11 items-center rounded-[22px] px-4 text-sm font-medium transition-colors"
+                style={
+                  selected
+                    ? { background: "#5A1826", color: "#F7F0E6" }
+                    : { border: "1px solid rgba(90,24,38,.25)", color: "#5A1826" }
+                }
+              >
+                {c.label}
+              </button>
+            );
+          })}
+        </div>
+        {errors.eventType && <p className={errorClass} style={errorStyle}>{errors.eventType}</p>}
+      </fieldset>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className={label} htmlFor="namesFirst">Имя (жениха/виновника)</label>
-          <input id="namesFirst" className={field} value={values.namesFirst} onChange={(e) => onChange("namesFirst", e.target.value)} />
-          {errors.namesFirst && <p className={errorText}>{errors.namesFirst}</p>}
+          <label className={labelClass} style={labelStyle} htmlFor="namesFirst">{nameLabels.first}</label>
+          <input
+            id="namesFirst"
+            className={fieldClass}
+            style={errors.namesFirst ? fieldBorderError : fieldBorder}
+            value={values.namesFirst}
+            onChange={(e) => onChange("namesFirst", e.target.value)}
+            aria-invalid={Boolean(errors.namesFirst)}
+          />
+          {errors.namesFirst && <p className={errorClass} style={errorStyle}>{errors.namesFirst}</p>}
         </div>
         <div>
-          <label className={label} htmlFor="namesSecond">Имя (невесты), если есть</label>
-          <input id="namesSecond" className={field} value={values.namesSecond} onChange={(e) => onChange("namesSecond", e.target.value)} />
+          <label className={labelClass} style={labelStyle} htmlFor="namesSecond">{nameLabels.second}</label>
+          <input
+            id="namesSecond"
+            className={fieldClass}
+            style={fieldBorder}
+            value={values.namesSecond}
+            onChange={(e) => onChange("namesSecond", e.target.value)}
+          />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className={label} htmlFor="date">Дата</label>
-          <input id="date" type="date" className={field} value={values.date} onChange={(e) => onChange("date", e.target.value)} />
-          {errors.date && <p className={errorText}>{errors.date}</p>}
+          <label className={labelClass} style={labelStyle} htmlFor="date">Дата</label>
+          <input
+            id="date"
+            type="date"
+            className={fieldClass}
+            style={errors.date ? fieldBorderError : fieldBorder}
+            value={values.date}
+            onChange={(e) => onChange("date", e.target.value)}
+            aria-invalid={Boolean(errors.date)}
+          />
+          {errors.date && <p className={errorClass} style={errorStyle}>{errors.date}</p>}
         </div>
         <div>
-          <label className={label} htmlFor="time">Время</label>
-          <input id="time" type="time" className={field} value={values.time} onChange={(e) => onChange("time", e.target.value)} />
-          {errors.time && <p className={errorText}>{errors.time}</p>}
+          <label className={labelClass} style={labelStyle} htmlFor="time">Начало</label>
+          <input
+            id="time"
+            type="time"
+            className={fieldClass}
+            style={fieldBorder}
+            value={values.time}
+            onChange={(e) => onChange("time", e.target.value)}
+          />
         </div>
       </div>
 
       <div>
-        <label className={label} htmlFor="venue">Заведение</label>
-        <input id="venue" className={field} value={values.venue} onChange={(e) => onChange("venue", e.target.value)} placeholder="Например, той-зал «Ак-Сарай»" />
-        {errors.venue && <p className={errorText}>{errors.venue}</p>}
-      </div>
-
-      <div>
-        <label className={label} htmlFor="address">Адрес</label>
-        <input id="address" className={field} value={values.address} onChange={(e) => onChange("address", e.target.value)} />
-        {errors.address && <p className={errorText}>{errors.address}</p>}
-      </div>
-
-      <div>
-        <label className={label} htmlFor="hosts">Хозяева тоя</label>
-        <input id="hosts" className={field} value={values.hosts} onChange={(e) => onChange("hosts", e.target.value)} placeholder="Например, родители Асан и Гүлнара" />
-        {errors.hosts && <p className={errorText}>{errors.hosts}</p>}
-      </div>
-
-      <div>
-        <span className={label}>Язык приглашения</span>
-        <div className="flex flex-wrap gap-2">
-          {langOptions.map((opt) => (
-            <button
-              key={opt.id}
-              type="button"
-              onClick={() => onChange("lang", opt.id)}
-              className={`min-h-11 px-4 rounded-full border text-sm transition-colors ${
-                values.lang === opt.id ? "border-accent bg-accent-soft/50 text-accent" : "border-black/10 text-text"
-              }`}
-              aria-pressed={values.lang === opt.id}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label className={label} htmlFor="wishes">Пожелания</label>
-        <textarea
-          id="wishes"
-          className={field}
-          rows={3}
-          value={values.wishes}
-          onChange={(e) => onChange("wishes", e.target.value)}
-          placeholder="Особые пожелания к дизайну или тексту"
+        <label className={labelClass} style={labelStyle} htmlFor="venue">Заведение</label>
+        <input
+          id="venue"
+          className={fieldClass}
+          style={fieldBorder}
+          value={values.venue}
+          onChange={(e) => onChange("venue", e.target.value)}
+          placeholder="Например, той-зал «Ак-Сарай»"
         />
       </div>
+
+      <div>
+        <label className={labelClass} style={labelStyle} htmlFor="address">Адрес</label>
+        <input
+          id="address"
+          className={fieldClass}
+          style={fieldBorder}
+          value={values.address}
+          onChange={(e) => onChange("address", e.target.value)}
+        />
+        <p className="mt-1 text-xs" style={{ color: "#6A4A48" }}>— добавим карту в приглашение</p>
+      </div>
+
+      <fieldset>
+        <legend className={labelClass} style={labelStyle}>Программа вечера — необязательно</legend>
+        <div className="space-y-2">
+          {values.program.map((row, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <input
+                type="time"
+                value={row.time}
+                onChange={(e) => updateProgramRow(i, { time: e.target.value })}
+                className={fieldClass}
+                style={{ ...fieldBorder, width: 120 }}
+              />
+              <input
+                value={row.title}
+                onChange={(e) => updateProgramRow(i, { title: e.target.value })}
+                placeholder="Например, Конокторду тосуу"
+                className={`${fieldClass} flex-1`}
+                style={fieldBorder}
+              />
+              <button
+                type="button"
+                onClick={() => removeProgramRow(i)}
+                aria-label="Удалить пункт программы"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border"
+                style={{ borderColor: "rgba(90,24,38,.2)", color: "#5A1826" }}
+              >
+                <X size={14} aria-hidden="true" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={addProgramRow}
+          className="mt-2 inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm font-medium"
+          style={{ borderColor: "rgba(90,24,38,.25)", color: "#5A1826" }}
+        >
+          <Plus size={14} aria-hidden="true" /> Добавить пункт
+        </button>
+      </fieldset>
+
+      <fieldset>
+        <legend className={labelClass} style={labelStyle}>Фото — необязательно</legend>
+        <div className="flex flex-wrap gap-2">
+          {values.photos.map((url, i) => (
+            <div key={url} className="relative h-16 w-16 overflow-hidden rounded-lg border" style={{ borderColor: "rgba(90,24,38,.18)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- внешние Storage-URL, next/image тут не нужен */}
+              <img src={url} alt="" className="h-full w-full object-cover" />
+              <button
+                type="button"
+                onClick={() => onChange("photos", values.photos.filter((_, idx) => idx !== i))}
+                aria-label="Удалить фото"
+                className="absolute right-0.5 top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-white"
+              >
+                <X size={10} aria-hidden="true" />
+              </button>
+            </div>
+          ))}
+          <label className="flex h-16 w-16 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-xs" style={{ borderColor: "rgba(90,24,38,.3)", color: "#6A4A48" }}>
+            {uploadingPhotos ? <Upload size={16} className="animate-pulse" aria-hidden="true" /> : <ImageIcon size={16} aria-hidden="true" />}
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              className="hidden"
+              onChange={(e) => handlePhotosSelected(e.target.files)}
+              disabled={uploadingPhotos}
+            />
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className={labelClass} style={labelStyle}>Музыка — необязательно</legend>
+        {values.music ? (
+          <div className="flex items-center gap-2 text-sm" style={{ color: "#2A0C12" }}>
+            <Music size={16} aria-hidden="true" /> Файл загружен
+            <button type="button" onClick={() => onChange("music", "")} className="underline" style={{ color: "#5A1826" }}>
+              Убрать
+            </button>
+          </div>
+        ) : (
+          <label
+            className="inline-flex h-11 cursor-pointer items-center gap-1.5 rounded-full border px-4 text-sm font-medium"
+            style={{ borderColor: "rgba(90,24,38,.25)", color: "#5A1826" }}
+          >
+            {uploadingMusic ? <Upload size={14} className="animate-pulse" aria-hidden="true" /> : <Music size={14} aria-hidden="true" />}
+            {uploadingMusic ? "Загружаем…" : "Загрузить MP3"}
+            <input
+              type="file"
+              accept="audio/mpeg,audio/mp3"
+              className="hidden"
+              onChange={(e) => handleMusicSelected(e.target.files)}
+              disabled={uploadingMusic}
+            />
+          </label>
+        )}
+      </fieldset>
+
+      {uploadError && <p className={errorClass} style={errorStyle}>{uploadError}</p>}
     </div>
   );
 }

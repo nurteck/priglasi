@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Hero } from "@/components/home/Hero";
 import { TrustBar } from "@/components/home/TrustBar";
 import { PopularDesigns } from "@/components/home/PopularDesigns";
@@ -21,7 +22,9 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustBar />
-      <PopularDesigns />
+      <Suspense fallback={null}>
+        <PopularDesigns />
+      </Suspense>
       <Features />
       <Packages />
       <Steps />

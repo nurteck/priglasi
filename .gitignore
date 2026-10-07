@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# сгенерировано scripts/build-invites.ts из public/invites/*/meta.json — не коммитим
+src/content/invites.generated.json
+src/content/invites.generated.server.json

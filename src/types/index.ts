@@ -17,10 +17,6 @@ export interface Category {
   image: string;
 }
 
-export interface PackageFeature {
-  text: string;
-}
-
 export interface Package {
   id: PackageId;
   name: string;
@@ -30,54 +26,62 @@ export interface Package {
   features: string[];
 }
 
-/** Строка, которая может быть локализована на кыргызский и русский. */
-export type Localized = string | { ky: string; ru: string };
-
-export interface ThemeColors {
-  bg: string;
-  surface: string;
-  text: string;
-  muted: string;
-  accent: string;
-  accentSoft: string;
-  seal: string;
-}
-
-export interface ThemeFonts {
-  script: string; // каллиграфический шрифт для имён
-  heading: string;
-  body: string;
-}
-
-export interface ThemeBackground {
-  image?: string;
-  texture?: "paper" | "linen" | "none";
-  overlay?: string;
-}
-
-export type ThemeDecor = "seal" | "floral" | "botanical" | "ornament" | "photo";
-
-export interface Theme {
+/** Профиль пользователя админки (создаётся вручную в Supabase после регистрации в Auth). */
+export interface Profile {
   id: string;
+  email: string;
   name: string;
-  colors: ThemeColors;
-  fonts: ThemeFonts;
-  background: ThemeBackground;
-  decor: ThemeDecor;
-  sealColor: string;
-  music: string;
+  role: "admin";
+  createdAt: string;
 }
 
-export interface Design {
-  slug: string;
-  name: string;
+export type InviteKind = "catalog" | "client";
+
+/** Содержимое meta.json внутри public/invites/[slug]/ (без hostKey) — карточка каталога/админки. */
+export interface InviteMeta {
+  title: string;
   category: CategoryId;
-  themeId: string;
-  cover: string;
-  defaultPackage: PackageId;
+  type: InviteKind;
+  price: number;
+  oldPrice?: number;
   badges?: ("hit" | "new")[];
-  featured?: boolean;
   order: number;
+  author: string;
+  published: boolean;
+}
+
+/** Публичная запись каталога — generated.json, без hostKey (безопасно для клиента).
+ *  eventDate берётся из data.json (единственный источник даты тоя — не дублируется в meta.json). */
+export interface InviteRecord extends InviteMeta {
+  slug: string;
+  cover: string; // путь вида /invites/[slug]/cover.jpg
+  eventDate: string;
+}
+
+/** Серверная запись — generated.server.json, с hostKey. Не импортировать в клиентские компоненты! */
+export interface InviteRecordWithKey extends InviteRecord {
+  hostKey: string;
+}
+
+export interface InviteProgramItem {
+  time: string;
+  title: string;
+}
+
+/** Содержимое data.json внутри public/invites/[slug]/ — ВСЕ тексты приглашения,
+ *  index.html их не хранит (см. public/shared/invite-data.js). */
+export interface InviteData {
+  couple: { one: string; two?: string };
+  eventType: CategoryId;
+  date: string; // YYYY-MM-DD
+  time: string; // HH:mm
+  venue: { name: string; address: string; map2gis?: string; mapGoogle?: string };
+  hosts?: string;
+  inviteText?: string;
+  program?: InviteProgramItem[];
+  language: Lang;
+  photos?: string[];
+  music?: string;
 }
 
 export interface Review {
@@ -96,45 +100,6 @@ export interface Faq {
   answer: string;
 }
 
-export interface ProgramItem {
-  time: string;
-  title: Localized;
-}
-
-export interface VenueInfo {
-  name: string;
-  address: string;
-  gis2Url?: string;
-  googleUrl?: string;
-}
-
-export interface InvitationBlocks {
-  envelope?: boolean;
-  intro?: { text: Localized };
-  hosts?: { names: string[]; text?: Localized };
-  calendar?: boolean;
-  countdown?: boolean;
-  program?: ProgramItem[];
-  venue?: VenueInfo;
-  gallery?: string[];
-  dressCode?: { text: Localized; colors?: string[] };
-  rsvp?: { deadline?: string };
-  finale?: boolean;
-}
-
-export interface Invitation {
-  slug: string;
-  themeId: string;
-  lang: Lang;
-  guestsKey?: string; // секретный ключ для премиум-списка гостей
-  names: { first: string; second?: string };
-  eventType: CategoryId;
-  date: string; // ISO со временем и часовым поясом
-  coverPhoto: string;
-  music?: string;
-  blocks: InvitationBlocks;
-}
-
 export type OrderStatus = "new" | "in_progress" | "done" | "paid";
 
 export interface OrderInput {
@@ -151,6 +116,9 @@ export interface OrderInput {
   hosts: string;
   lang: Lang;
   wishes?: string;
+  program?: InviteProgramItem[];
+  photos?: string[];
+  music?: string;
   clientName: string;
   phone: string;
 }
@@ -162,21 +130,14 @@ export interface Order extends OrderInput {
   createdAt: string;
 }
 
-export interface RsvpInput {
-  invitationSlug: string;
+/** Персональная ссылка на приглашение, которую хозяин тоя создаёт на /host/[slug]. */
+export interface GuestInput {
+  slug: string;
   name: string;
-  attending: boolean;
-  guests: number;
-  wish?: string;
-  honeypot?: string;
+  seats: number;
 }
 
-export interface Rsvp {
+export interface Guest extends GuestInput {
   id: string;
-  invitationSlug: string;
-  name: string;
-  attending: boolean;
-  guests: number;
-  wish?: string;
   createdAt: string;
 }
