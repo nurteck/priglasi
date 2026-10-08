@@ -1,0 +1,12 @@
+{
+  "title": "Azure Bloom",
+  "category": "wedding",
+  "type": "catalog",
+  "price": 3000,
+  "oldPrice": 3500,
+  "badges": ["new"],
+  "order": 3,
+  "author": "Команда Салтанат",
+  "hostKey": "7f34c9df055e3f349db14bef2659d791",
+  "published": true
+}
